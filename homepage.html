@@ -1,1549 +1,1430 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PAYOTE · Espadrilles Artisanales <i>made in France</i></title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
-  <script src="i18n.js"></script>
-  <style>
-    /* ── TOKENS ──────────────────────────────────────── */
-    :root {
-      --ink:      #16140f;
-      --cream:    #faf8f5;
-      --sand:     #f2ebe0;
-      --muted:    #7a7060;
-      --accent:   #c4a46b;
-      --fr-blue:  #002395;
-      --fr-white: #ffffff;
-      --fr-red:   #ED2939;
-      --serif:    'Cormorant Garamond', Georgia, serif;
-      --sans:     'Outfit', system-ui, sans-serif;
-      --r:        1.5rem;
-      --sh:       0 8px 48px rgba(22,20,15,.10);
-      --nav-h:    72px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--sans);
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PAYOTE · Espadrilles Artisanales de France</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─── TOKENS ──────────────────────────────────── */
+:root {
+  --navy:    #0D2855;
+  --rouge:   #D0202F;
+  --cream:   #FAF7F2;
+  --sand:    #F0E8DC;
+  --gold:    #C4A46B;
+  --terra:   #E46A2E;
+  --muted:   #5a6475;
+  --bleu:    #2E3A48;
+  --serif:   'Playfair Display', Georgia, serif;
+  --sans:    'Montserrat', system-ui, sans-serif;
+  --nav-h:   80px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--bleu);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       MEGA-NAV
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .site-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: var(--nav-h);
-      transition: background .4s, backdrop-filter .4s, border-color .4s;
-      border-bottom: 1px solid transparent;
-    }
-    .site-header.scrolled {
-      background: rgba(250,248,245,.96);
-      backdrop-filter: blur(20px);
-      border-color: rgba(22,20,15,.07);
-    }
-    /* FR tricolore top stripe */
-    .site-header::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(to right, var(--fr-blue) 33%, #fff 33% 66%, var(--fr-red) 66%);
-      opacity: 0; transition: opacity .4s;
-    }
-    .site-header.scrolled::before { opacity: 1; }
+/* ─── VERSION SWITCHER ────────────────────────── */
+#vsw{
+  position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);
+  z-index:600;display:flex;gap:.25rem;
+  background:rgba(6,14,26,.88);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.12);border-radius:99px;
+  padding:.35rem .35rem;
+  box-shadow:0 8px 40px rgba(0,0,0,.4);
+}
+.vbtn{
+  border:none;border-radius:99px;padding:.48rem 1.3rem;
+  font-size:.68rem;font-family:var(--sans);font-weight:500;letter-spacing:.08em;
+  cursor:pointer;transition:background .25s,color .25s;
+  color:rgba(255,255,255,.4);background:transparent;white-space:nowrap;
+}
+.vbtn.on{background:#fff;color:var(--navy);}
 
-    .nav-inner {
-      max-width: 1400px; margin: auto;
-      height: var(--nav-h);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 0 2rem;
-      gap: 1rem;
-    }
+/* ─── NAV ─────────────────────────────────────── */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:var(--nav-h);
+  transition:background .4s,backdrop-filter .4s,box-shadow .4s;
+}
+/* FR tricolore hairline */
+.site-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:1;
+  background:linear-gradient(to right,var(--navy) 33%,rgba(255,255,255,.85) 33% 66%,var(--rouge) 66%);
+}
+/* dark hero → transparent, becomes navy on scroll */
+.site-header.mode-dark{background:rgba(6,14,26,0);}
+.site-header.mode-dark.scrolled{background:rgba(6,14,26,.96);backdrop-filter:blur(20px);box-shadow:0 4px 40px rgba(0,0,0,.4);}
+/* light → white always */
+.site-header.mode-light{background:#fff;box-shadow:0 1px 0 rgba(13,40,85,.08);}
 
-    /* ── LEFT NAV ───────────────────────────────────── */
-    .nav-left {
-      display: flex; align-items: center; gap: 0;
-    }
+.nav-inner{
+  max-width:1440px;margin:auto;height:var(--nav-h);
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;padding:0 2.5rem;gap:2rem;
+}
+/* LEFT */
+.nav-left{display:flex;align-items:stretch;height:100%;gap:0;}
+.nav-item{position:relative;display:flex;align-items:center;}
+.nav-trig{
+  display:flex;align-items:center;gap:.3rem;padding:0 .9rem;height:100%;
+  font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:none;background:none;font-family:var(--sans);cursor:pointer;
+  white-space:nowrap;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+.mode-dark .nav-trig{color:rgba(255,255,255,.7);}
+.mode-dark.scrolled .nav-trig{color:rgba(255,255,255,.7);}
+.mode-light .nav-trig{color:var(--navy);}
+.nav-trig:hover,.nav-item:hover>.nav-trig{border-bottom-color:var(--rouge);}
+.mode-dark .nav-trig:hover,.mode-dark.scrolled .nav-trig:hover{color:#fff;border-bottom-color:rgba(255,255,255,.5);}
+.nav-trig.red{color:var(--rouge)!important;font-weight:700;}
+.mode-dark .nav-trig.red{color:#ff8080!important;}
+.chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-1px);transition:transform .25s;opacity:.55;}
+.nav-item:hover>.nav-trig .chev{transform:rotate(225deg) translateY(2px);opacity:1;}
 
-    .nav-item {
-      position: relative;
-    }
-    .nav-trigger {
-      display: flex; align-items: center; gap: .3rem;
-      padding: .5rem .85rem;
-      font-size: .78rem; font-weight: 400;
-      letter-spacing: .05em; text-transform: uppercase;
-      color: #fff; cursor: pointer; border: none; background: none;
-      font-family: var(--sans);
-      transition: color .2s; white-space: nowrap;
-    }
-    .site-header.scrolled .nav-trigger { color: var(--ink); }
-    .nav-trigger .chevron {
-      width: 10px; height: 10px;
-      border-right: 1.5px solid currentColor;
-      border-bottom: 1.5px solid currentColor;
-      transform: rotate(45deg) translateY(-2px);
-      transition: transform .25s;
-      margin-top: 2px;
-    }
-    .nav-item:hover .chevron { transform: rotate(225deg) translateY(2px); }
-    .nav-trigger.solo { padding: .5rem .85rem; }
-    .nav-trigger.highlight {
-      color: var(--fr-red) !important;
-      font-weight: 500;
-    }
+/* BRAND */
+.nav-brand{
+  display:flex;align-items:center;gap:.75rem;
+  text-decoration:none;padding:.25rem .5rem;
+}
+.brand-badge{
+  height:48px;width:auto;flex-shrink:0;
+  transition:filter .4s;
+}
+.mode-dark .brand-badge,.mode-dark.scrolled .brand-badge{filter:brightness(0) invert(1);}
+.mode-light .brand-badge{filter:none;}
+.brand-text{display:flex;flex-direction:column;}
+.brand-wm{
+  font-family:var(--serif);font-size:1.5rem;font-weight:500;
+  letter-spacing:.2em;line-height:1;transition:color .4s;
+}
+.mode-dark .brand-wm,.mode-dark.scrolled .brand-wm{color:#fff;}
+.mode-light .brand-wm{color:var(--navy);}
+.brand-sub{
+  font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:.1rem;transition:color .4s;
+}
+.mode-light .brand-sub{color:var(--muted);}
 
-    /* ── BRAND CENTER ───────────────────────────────── */
-    .nav-brand {
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; cursor: pointer;
-    }
-    .brand-flag {
-      display: flex; height: 3px; width: 36px; border-radius: 99px; overflow: hidden; margin-bottom: .3rem;
-    }
-    .brand-flag span { flex: 1; }
-    .brand-flag .b { background: var(--fr-blue); }
-    .brand-flag .w { background: #fff; }
-    .brand-flag .r { background: var(--fr-red); }
-    .brand-logo {
-      width: 44px; height: 25px; display: block; margin: 0 auto .3rem;
-      color: #fff; transition: color .4s;
-    }
-    .site-header.scrolled .brand-logo { color: var(--ink); }
-    .brand-wordmark {
-      font-family: var(--serif); font-size: 1.75rem;
-      font-weight: 300; letter-spacing: .18em;
-      color: #fff; line-height: 1;
-      transition: color .4s;
-    }
-    .site-header.scrolled .brand-wordmark { color: var(--ink); }
+/* RIGHT */
+.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:.4rem;}
+.nav-pill{
+  padding:.35rem .8rem;font-size:.63rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:99px;border:1px solid rgba(255,255,255,.25);
+  background:transparent;cursor:pointer;font-family:var(--sans);
+  white-space:nowrap;text-decoration:none;transition:.2s;
+}
+.mode-dark .nav-pill,.mode-dark.scrolled .nav-pill{color:rgba(255,255,255,.65);}
+.mode-dark .nav-pill:hover,.mode-dark.scrolled .nav-pill:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.5);}
+.mode-light .nav-pill{color:var(--navy);border-color:rgba(13,40,85,.22);}
+.mode-light .nav-pill:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.nav-icon{
+  width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+  background:transparent;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.2s;text-decoration:none;
+}
+.mode-dark .nav-icon svg,.mode-dark.scrolled .nav-icon svg{stroke:#fff;opacity:.65;}
+.mode-light .nav-icon{border-color:rgba(13,40,85,.18);}
+.mode-light .nav-icon svg{stroke:var(--navy);opacity:.7;}
+.nav-icon:hover{background:rgba(255,255,255,.12);}
+.mode-light .nav-icon:hover{background:var(--sand);}
+.nav-icon svg{width:15px;height:15px;fill:none;stroke-width:1.6;}
+.nav-cart{
+  display:flex;align-items:center;gap:.35rem;padding:.44rem 1.1rem;
+  background:var(--rouge);color:#fff;border:none;border-radius:99px;
+  font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  font-family:var(--sans);cursor:pointer;transition:.2s;text-decoration:none;
+}
+.nav-cart:hover{transform:scale(1.03);box-shadow:0 4px 18px rgba(208,32,47,.45);}
+.cart-n{background:rgba(255,255,255,.25);border-radius:99px;padding:.04rem .38rem;font-size:.6rem;font-weight:700;}
 
-    /* ── RIGHT NAV ───────────────────────────────────── */
-    .nav-right {
-      display: flex; align-items: center; justify-content: flex-end; gap: .4rem;
-    }
-    .nav-util {
-      padding: .42rem .8rem;
-      font-size: .72rem; letter-spacing: .04em;
-      border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
-      color: #fff; background: transparent;
-      cursor: pointer; font-family: var(--sans);
-      transition: background .2s, border-color .2s, color .2s;
-      white-space: nowrap;
-    }
-    .site-header.scrolled .nav-util {
-      border-color: rgba(22,20,15,.15); color: var(--ink);
-    }
-    .nav-util:hover {
-      background: rgba(255,255,255,.12);
-    }
-    .site-header.scrolled .nav-util:hover {
-      background: var(--ink); color: #fff; border-color: var(--ink);
-    }
-    .nav-cart {
-      display: flex; align-items: center; gap: .45rem;
-      padding: .48rem 1rem;
-      background: var(--fr-blue); color: #fff;
-      border: none; border-radius: 999px;
-      font-size: .72rem; font-family: var(--sans);
-      cursor: pointer; transition: transform .2s, box-shadow .2s;
-    }
-    .nav-cart:hover { transform: scale(1.03); box-shadow: 0 4px 18px rgba(0,35,149,.35); }
-    .cart-count {
-      background: #fff; color: var(--fr-blue);
-      border-radius: 999px; padding: .05rem .45rem;
-      font-size: .65rem; font-weight: 700;
-    }
+/* Mega dropdown */
+.mega-drop{
+  position:absolute;top:100%;left:0;
+  background:#fff;border-top:3px solid var(--navy);
+  border:1px solid rgba(13,40,85,.1);border-top:3px solid var(--navy);
+  border-radius:0 1.2rem 1.2rem 1.2rem;
+  box-shadow:0 24px 80px rgba(13,40,85,.18);
+  padding:2rem 2.2rem 2.2rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .2s;transform:translateY(8px);
+  min-width:680px;display:grid;grid-template-columns:1.3fr 1fr 200px;gap:2rem;z-index:300;
+}
+.nav-item:hover>.mega-drop{opacity:1;pointer-events:all;transform:translateY(0);}
+.mc-title{
+  font-size:.57rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1.5px solid var(--sand);
+}
+.mc-link{
+  display:flex;align-items:center;gap:0;
+  font-size:.82rem;color:var(--bleu);padding:.35rem 0;
+  transition:color .15s,gap .2s;
+}
+.mc-link::before{content:'';width:0;height:1.5px;background:var(--rouge);transition:width .2s,margin-right .2s;flex-shrink:0;}
+.mc-link:hover{color:var(--navy);gap:.5rem;}
+.mc-link:hover::before{width:12px;margin-right:3px;}
+.mc-link.new{color:var(--rouge);font-weight:600;}
+.mc-link.soldes{color:var(--rouge);}
+.mc-visual{
+  border-radius:.8rem;overflow:hidden;aspect-ratio:3/4;
+  background-size:cover;background-position:center;position:relative;display:block;
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.mc-visual:hover{transform:scale(1.02);}
+.mc-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,40,85,.7),transparent 55%);}
+.mc-vis-label{position:absolute;bottom:.8rem;left:.8rem;z-index:1;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;font-family:var(--sans);}
 
-    /* icon btns */
-    .nav-icon {
-      width: 38px; height: 38px;
-      border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
-      background: transparent;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background .2s, border-color .2s;
-      color: #fff;
-    }
-    .site-header.scrolled .nav-icon {
-      border-color: rgba(22,20,15,.15); color: var(--ink);
-    }
-    .nav-icon:hover { background: rgba(255,255,255,.12); }
-    .site-header.scrolled .nav-icon:hover { background: var(--sand); }
-    .nav-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+/* Mobile */
+.hamburger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;cursor:pointer;align-items:center;justify-content:center;}
+.hamburger span{display:block;width:22px;height:1.5px;border-radius:2px;transition:.3s;}
+.mode-dark .hamburger span,.mode-dark.scrolled .hamburger span{background:#fff;}
+.mode-light .hamburger span{background:var(--navy);}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,4px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-4px);}
+.mob-menu{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:#fff;z-index:190;overflow-y:auto;padding:2rem 1.5rem 3rem;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.mob-menu.open{transform:translateX(0);}
+.mob-sec{margin-bottom:2rem;}
+.mob-sec-t{font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid var(--sand);}
+.mob-a{display:block;padding:.65rem 0;font-size:.9rem;color:var(--bleu);border-bottom:1px solid rgba(13,40,85,.05);}
+.mob-a.r{color:var(--rouge);font-weight:600;}
+.mob-utils{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem;}
+.mob-util-btn{flex:1;min-width:110px;padding:.75rem 1rem;text-align:center;border:1px solid rgba(13,40,85,.15);border-radius:99px;font-size:.75rem;color:var(--navy);background:transparent;font-family:var(--sans);}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       MEGA DROPDOWN
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .mega-drop {
-      position: absolute; top: calc(100% + 4px); left: 50%;
-      transform: translateX(-50%) translateY(6px);
-      background: #fff;
-      border: 1px solid rgba(22,20,15,.08);
-      border-radius: 1.2rem;
-      box-shadow: 0 24px 80px rgba(22,20,15,.16);
-      padding: 2rem 2.2rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity .22s, transform .22s;
-      width: 600px;
-      display: grid; grid-template-columns: 1.1fr 1fr 180px; gap: 1.5rem;
-      z-index: 300;
-    }
-    .nav-item:hover .mega-drop {
-      opacity: 1; pointer-events: all;
-      transform: translateX(-50%) translateY(0);
-    }
-    .mega-col-title {
-      font-size: .6rem; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: .9rem; font-weight: 500;
-    }
-    .mega-link {
-      display: block; font-size: .82rem; color: var(--ink);
-      padding: .3rem 0; letter-spacing: .02em;
-      transition: color .15s, padding-left .15s;
-    }
-    .mega-link:hover { color: var(--fr-blue); padding-left: .3rem; }
-    .mega-link.new { color: var(--fr-red); font-weight: 500; }
-    .mega-link.soldes { color: var(--fr-red); }
+/* ─── V1 — CINEMATIC FULL-BLEED HERO ─────────── */
+.hero-v1{
+  position:relative;min-height:100svh;overflow:hidden;
+  display:flex;align-items:center;background:#060e1a;
+}
+.hero-v1 .bg-blur{
+  position:absolute;inset:-5%;background-size:cover;background-position:center;
+  filter:blur(28px) brightness(.52) saturate(1.1);transform:scale(1.05);
+  transition:opacity 1.8s ease;z-index:0;
+}
+.hero-v1 .bg-blur.on{opacity:1;}
+.hero-v1 .bg-blur.off{opacity:0;}
+.hero-v1 .vignette{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse at 35% 50%,transparent 25%,rgba(4,9,22,.6) 100%);
+}
+/* FR left stripe */
+.fr-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;z-index:5;display:flex;flex-direction:column;}
+.fr-stripe span{flex:1;}
+.fr-b{background:var(--navy);}
+.fr-w{background:rgba(255,255,255,.7);}
+.fr-r{background:var(--rouge);}
+/* grain */
+.hero-v1::before{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+  animation:grain 2s steps(2) infinite;
+}
+@keyframes grain{0%,100%{transform:translate(0,0);}25%{transform:translate(-2%,-1%);}75%{transform:translate(1%,1%);}}
 
-    .mega-visual {
-      border-radius: 1rem; overflow: hidden;
-      aspect-ratio: 3/4;
-      background: var(--sand);
-      background-size: cover; background-position: center;
-      position: relative;
-    }
-    .mega-visual-label {
-      position: absolute; bottom: .8rem; left: .8rem;
-      font-size: .68rem; font-weight: 600; letter-spacing: .15em;
-      text-transform: uppercase; color: #fff;
-      background: rgba(22,20,15,.5); backdrop-filter: blur(6px);
-      padding: .3rem .7rem; border-radius: 999px;
-    }
+.hero-v1-inner{
+  position:relative;z-index:10;
+  width:100%;max-width:1440px;margin:0 auto;padding:0 3rem;
+  padding-top:calc(var(--nav-h) + 3rem);padding-bottom:4rem;
+  display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:3rem;
+}
 
-    /* FR accent on dropdown */
-    .mega-drop::before {
-      content: '';
-      position: absolute; top: 0; left: 2rem; right: 2rem; height: 2px;
-      background: linear-gradient(to right, var(--fr-blue) 33%, #eee 33% 66%, var(--fr-red) 66%);
-      border-radius: 1px;
-    }
+/* Copy */
+.cin-eye{
+  font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;
+  color:rgba(255,255,255,.38);margin-bottom:2rem;
+  display:flex;align-items:center;gap:.8rem;
+  opacity:0;animation:fadeup .8s .2s forwards;
+}
+.cin-eye::before{content:'';width:24px;height:1.5px;background:linear-gradient(to right,var(--navy),var(--rouge));flex-shrink:0;}
+.cin-h1{
+  font-family:var(--serif);font-size:clamp(3.2rem,6.5vw,7rem);
+  font-weight:500;line-height:.92;color:#fff;letter-spacing:-.01em;
+}
+.cin-h1 .line{display:block;overflow:hidden;}
+.cin-h1 .li{display:block;transform:translateY(110%);animation:slideup .95s cubic-bezier(.16,1,.3,1) forwards;}
+.cin-h1 .line:nth-child(1) .li{animation-delay:.4s;}
+.cin-h1 .line:nth-child(2) .li{animation-delay:.55s;}
+.cin-h1 .line:nth-child(3) .li{animation-delay:.7s;}
+.cin-h1 em{font-style:italic;color:var(--gold);}
+.cin-sub{
+  margin-top:1.8rem;color:rgba(255,255,255,.5);
+  font-size:clamp(.82rem,1.2vw,.95rem);line-height:1.85;max-width:380px;
+  opacity:0;animation:fadeup .8s 1.1s forwards;
+}
+.cin-cta{
+  margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:fadeup .8s 1.3s forwards;
+}
+.btn-primary{
+  background:#fff;color:var(--navy);border:none;border-radius:2px;
+  padding:.85rem 2rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;font-family:var(--sans);cursor:pointer;
+  display:inline-block;transition:transform .25s,box-shadow .25s,background .25s,color .25s;
+  position:relative;overflow:hidden;
+}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--navy);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+.btn-primary:hover{transform:scale(1.02);box-shadow:0 6px 24px rgba(13,40,85,.35);color:#fff;}
+.btn-primary:hover::before{transform:scaleX(1);}
+.btn-primary span{position:relative;z-index:1;}
+.btn-ghost{
+  background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:2px;
+  padding:.85rem 2rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;font-family:var(--sans);cursor:pointer;
+  color:rgba(255,255,255,.7);transition:.25s;display:inline-block;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.7);color:#fff;}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       MOBILE NAV
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .hamburger {
-      display: none;
-      flex-direction: column; gap: 5px; cursor: pointer;
-      width: 36px; height: 36px; align-items: center; justify-content: center;
-    }
-    .hamburger span {
-      display: block; width: 22px; height: 1.5px;
-      background: #fff; border-radius: 2px;
-      transition: background .3s, transform .3s, opacity .3s;
-    }
-    .site-header.scrolled .hamburger span { background: var(--ink); }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 4px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -4px); }
+/* Shuffle stack */
+.shuffle-stage{
+  position:relative;z-index:10;
+  height:min(76vh,680px);min-height:480px;
+  display:flex;align-items:center;justify-content:flex-end;
+}
+.sh-main{
+  width:280px;height:100%;border-radius:1.6rem;overflow:hidden;
+  position:relative;box-shadow:0 40px 100px rgba(0,0,0,.55);flex-shrink:0;
+}
+.sh-main-img{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:opacity .9s cubic-bezier(.4,0,.2,1),transform 8s ease;
+}
+.sh-main-img.on{opacity:1;transform:scale(1.04);}
+.sh-main-img.off{opacity:0;transform:scale(1);}
+.sh-label{
+  position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:3;
+  background:rgba(6,14,26,.5);backdrop-filter:blur(12px);
+  border-radius:.9rem;padding:.9rem 1.1rem;border:1px solid rgba(255,255,255,.1);
+}
+.sh-tag{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+.sh-name{font-family:var(--serif);font-size:1rem;color:#fff;font-weight:400;}
+.sh-price{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.1rem;}
 
-    .mobile-menu {
-      display: none; position: fixed;
-      top: var(--nav-h); left: 0; right: 0; bottom: 0;
-      background: #fff; z-index: 190; overflow-y: auto;
-      padding: 1.5rem 1.5rem 3rem;
-      transform: translateX(100%);
-      transition: transform .35s cubic-bezier(.4,0,.2,1);
-    }
-    .mobile-menu.open { transform: translateX(0); }
-    .mob-section { margin-bottom: 2rem; }
-    .mob-section-title {
-      font-size: .6rem; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: .8rem; padding-bottom: .5rem;
-      border-bottom: 1px solid rgba(22,20,15,.07);
-    }
-    .mob-link {
-      display: block; padding: .65rem 0;
-      font-size: .9rem; color: var(--ink);
-      border-bottom: 1px solid rgba(22,20,15,.04);
-    }
-    .mob-link.red { color: var(--fr-red); }
-    .mob-util-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .mob-util-btn {
-      flex: 1; min-width: 120px;
-      padding: .8rem 1rem; text-align: center;
-      border: 1px solid rgba(22,20,15,.12); border-radius: 999px;
-      font-size: .8rem; color: var(--ink); cursor: pointer;
-      background: transparent; font-family: var(--sans);
-    }
+.sh-side{display:flex;flex-direction:column;gap:1rem;margin-left:1.1rem;}
+.sh-thumb{
+  width:140px;height:140px;border-radius:1.2rem;overflow:hidden;position:relative;
+  box-shadow:0 18px 44px rgba(0,0,0,.38);cursor:pointer;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,outline .2s;
+}
+.sh-thumb:hover{transform:translateX(-4px) scale(1.03);}
+.sh-thumb.active{outline:2px solid rgba(255,255,255,.65);outline-offset:2px;}
+.sh-thumb-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .7s;}
+.sh-thumb-img.on{opacity:1;}
+.sh-thumb-img.off{opacity:0;}
+.sh-thumb::after{content:attr(data-name);position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(6,14,26,.75));color:#fff;font-size:.62rem;letter-spacing:.05em;padding:.9rem .6rem .55rem;opacity:0;transition:opacity .25s;font-family:var(--serif);}
+.sh-thumb:hover::after{opacity:1;}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       VERSION SWITCHER
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    #vsw {
-      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      z-index: 500;
-      background: rgba(22,20,15,.85); backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 999px; padding: .4rem .4rem;
-      display: flex; gap: .25rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,.35);
-    }
-    .vbtn {
-      border: none; border-radius: 999px;
-      padding: .5rem 1.2rem; font-size: .72rem;
-      font-family: var(--sans); font-weight: 400;
-      cursor: pointer; transition: background .25s, color .25s;
-      color: rgba(255,255,255,.45); background: transparent;
-      letter-spacing: .08em; white-space: nowrap;
-    }
-    .vbtn.active {
-      background: #fff; color: var(--ink); font-weight: 500;
-    }
+.sh-nav{display:flex;align-items:center;gap:1rem;margin-top:1rem;}
+.sh-counter{font-size:.62rem;letter-spacing:.18em;color:rgba(255,255,255,.38);}
+.sh-lines{display:flex;gap:.4rem;}
+.sh-line{height:2px;border-radius:2px;background:rgba(255,255,255,.22);cursor:pointer;transition:width .4s,background .4s;}
+.sh-line.on{background:#fff;}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       VERSION 1 — CINEMATIC / OPTION B
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    /* Full-bleed blurred backdrop */
-    .hero-v1 {
-      height: 100svh; min-height: 620px;
-      position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      background: #0a1628;
-    }
-    /* Blurred BG images — cycle with JS */
-    .hero-v1 .bg-blur {
-      position: absolute; inset: -5%; z-index: 0;
-      background-size: cover; background-position: center;
-      transition: opacity 1.6s ease;
-      filter: blur(2px) brightness(.55) saturate(1.15);
-      transform: scale(1.05);
-    }
-    .hero-v1 .bg-blur.on { opacity: 1; }
-    .hero-v1 .bg-blur.off { opacity: 0; }
-    /* warm vignette over the blur */
-    .hero-v1 .vignette {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse at 30% 50%, transparent 30%, rgba(5,10,20,.65) 100%);
-    }
-    /* grain */
-    .hero-v1::before {
-      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      opacity: .5; animation: grain 2s steps(2) infinite;
-    }
-    @keyframes grain {
-      0%,100% { transform: translate(0,0); }
-      25% { transform: translate(-2%,-1%); }
-      75% { transform: translate(1%,1%); }
-    }
-    /* FR left stripe */
-    .fr-stripe {
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 4px; z-index: 6; display: flex; flex-direction: column;
-    }
-    .fr-stripe span { flex: 1; }
-    .fr-stripe .b { background: var(--fr-blue); }
-    .fr-stripe .w { background: rgba(255,255,255,.7); }
-    .fr-stripe .r { background: var(--fr-red); }
+/* Scroll hint */
+.scroll-hint{
+  position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);
+  z-index:10;color:rgba(255,255,255,.28);font-size:.57rem;letter-spacing:.35em;text-transform:uppercase;
+  animation:shbounce 2.5s ease-in-out infinite;
+}
+.scroll-hint::after{content:'';display:block;width:1px;height:30px;background:linear-gradient(to bottom,rgba(255,255,255,.28),transparent);margin:.5rem auto 0;}
+@keyframes shbounce{0%,100%{opacity:.28;transform:translateX(-50%) translateY(0);}50%{opacity:.5;transform:translateX(-50%) translateY(4px);}}
+@keyframes fadeup{to{opacity:1;}}
+@keyframes slideup{to{transform:translateY(0);}}
 
-    /* ── Inner editorial container ── */
-    .hero-v1 .hero-inner {
-      position: relative; z-index: 10;
-      width: 100%; max-width: 1360px; margin: 0 auto;
-      padding: 0 3rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
-      padding-top: var(--nav-h);
-    }
-    /* Copy side */
-    .cin-content {
-      position: relative; z-index: 10;
-      padding: 2rem 0;
-    }
-    .cin-eye {
-      font-size: .6rem; letter-spacing: .48em; text-transform: uppercase;
-      color: rgba(255,255,255,.4); margin-bottom: 2rem;
-      opacity: 0; animation: fadein .8s .3s forwards;
-      display: flex; align-items: center; gap: .8rem;
-    }
-    .cin-eye::before {
-      content: ''; width: 24px; height: 1.5px;
-      background: linear-gradient(to right, var(--fr-blue), var(--fr-red));
-      flex-shrink: 0;
-    }
-    .cin-h1 {
-      font-family: var(--serif);
-      font-size: clamp(3.5rem, 7vw, 7.5rem);
-      font-weight: 300; line-height: .95; color: #fff; letter-spacing: .01em;
-    }
-    .cin-h1 .line { display: block; overflow: hidden; }
-    .cin-h1 .li {
-      display: block;
-      transform: translateY(110%);
-      animation: slideup .95s cubic-bezier(.16,1,.3,1) forwards;
-    }
-    .cin-h1 .line:nth-child(1) .li { animation-delay: .45s; }
-    .cin-h1 .line:nth-child(2) .li { animation-delay: .6s; }
-    .cin-h1 .line:nth-child(3) .li { animation-delay: .75s; }
-    .cin-h1 em { font-style: italic; color: var(--accent); }
-    .cin-sub {
-      margin-top: 1.8rem; color: rgba(255,255,255,.5);
-      font-size: clamp(.82rem,1.2vw,.95rem); font-weight: 300; letter-spacing: .03em;
-      max-width: 400px; line-height: 1.8;
-      opacity: 0; animation: fadein .8s 1.2s forwards;
-    }
-    .cin-btns {
-      margin-top: 2.5rem; display: flex; gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0; animation: fadein .8s 1.4s forwards;
-    }
-    .btn-primary {
-      background: #fff; color: var(--ink);
-      border: none; border-radius: 999px;
-      padding: .9rem 2.2rem; font-size: .82rem;
-      font-family: var(--sans); font-weight: 500; cursor: pointer;
-      position: relative; overflow: hidden;
-      transition: transform .3s, box-shadow .3s, color .3s;
-      display: inline-block;
-    }
-    .btn-primary::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--fr-blue);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .4s cubic-bezier(.4,0,.2,1);
-    }
-    .btn-primary:hover { transform: scale(1.03); box-shadow: 0 6px 28px rgba(0,35,149,.35); color: #fff; }
-    .btn-primary:hover::before { transform: scaleX(1); }
-    .btn-primary span { position: relative; z-index: 1; }
-    .btn-ghost {
-      background: transparent; border: 1px solid rgba(255,255,255,.28);
-      border-radius: 999px; padding: .9rem 2.2rem;
-      font-size: .82rem; font-family: var(--sans); cursor: pointer;
-      color: rgba(255,255,255,.75); transition: border-color .3s, color .3s;
-      display: inline-block;
-    }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.65); color: #fff; }
+/* ─── V1 DISPLAY ──────────────────────────────── */
+.v-section{display:none;}
+.v-section.on{display:block;}
 
-    /* ── Shuffle card stack (right side) ── */
-    .shuffle-stage {
-      position: relative; z-index: 10;
-      height: min(75vh, 640px); min-height: 480px;
-      display: flex; align-items: center; justify-content: flex-end;
-      padding-top: var(--nav-h);
-    }
-    /* Big portrait card */
-    .sh-main {
-      width: 260px; height: 100%;
-      border-radius: 1.4rem; overflow: hidden;
-      position: relative;
-      box-shadow: 0 32px 80px rgba(0,0,0,.5);
-      flex-shrink: 0;
-    }
-    .sh-main-img {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      transition: opacity .9s cubic-bezier(.4,0,.2,1), transform 8s ease;
-    }
-    .sh-main-img.on { opacity: 1; transform: scale(1.04); }
-    .sh-main-img.off { opacity: 0; transform: scale(1); }
-    /* card label overlay */
-    .sh-main-label {
-      position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem; z-index: 3;
-      background: rgba(22,20,15,.5); backdrop-filter: blur(12px);
-      border-radius: .9rem; padding: .9rem 1.1rem;
-      border: 1px solid rgba(255,255,255,.1);
-    }
-    .sh-main-tag { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: .25rem; }
-    .sh-main-name { font-family: var(--serif); font-size: 1.05rem; color: #fff; font-weight: 300; }
-    .sh-main-price { font-size: .78rem; color: rgba(255,255,255,.5); margin-top: .1rem; }
+/* ─── COLLECTION SHUFFLE (below V1 hero) ─────── */
+/* → full-bleed horizontal strip with new collection images */
+.coll-strip{
+  background:var(--navy);padding:1rem 0 0;overflow:hidden;
+}
+.coll-strip-head{
+  max-width:1440px;margin:0 auto;padding:2rem 3rem .8rem;
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+.coll-strip-title{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:500;color:#fff;}
+.coll-strip-link{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color .2s;}
+.coll-strip-link:hover{color:#fff;}
 
-    /* Small side cards column */
-    .sh-side {
-      display: flex; flex-direction: column; gap: 1rem;
-      margin-left: 1rem;
-    }
-    .sh-thumb {
-      width: 130px; height: 130px;
-      border-radius: 1.1rem; overflow: hidden;
-      position: relative;
-      box-shadow: 0 16px 40px rgba(0,0,0,.4);
-      cursor: pointer;
-      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
-      flex-shrink: 0;
-    }
-    .sh-thumb:hover { transform: translateX(-4px) scale(1.03); box-shadow: 0 22px 50px rgba(0,0,0,.5); }
-    .sh-thumb-img {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      transition: opacity .7s ease;
-    }
-    .sh-thumb-img.on { opacity: 1; }
-    .sh-thumb-img.off { opacity: 0; }
-    /* thumb overlay — show on hover */
-    .sh-thumb::after {
-      content: attr(data-name);
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(22,20,15,.75));
-      color: #fff; font-size: .65rem; letter-spacing: .06em;
-      padding: .9rem .6rem .55rem;
-      opacity: 0; transition: opacity .25s;
-      font-family: var(--serif);
-    }
-    .sh-thumb:hover::after { opacity: 1; }
-    /* active thumb indicator */
-    .sh-thumb.active { outline: 2px solid rgba(255,255,255,.6); outline-offset: 2px; }
+.coll-track-wrap{position:relative;padding:0 3rem 2rem;}
+.coll-track{
+  display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;padding-bottom:.5rem;
+}
+.coll-track::-webkit-scrollbar{display:none;}
+.coll-card{
+  flex:0 0 260px;height:360px;border-radius:1.2rem;overflow:hidden;position:relative;
+  background:var(--bleu);scroll-snap-align:start;cursor:pointer;
+  transition:transform .35s cubic-bezier(.16,1,.3,1);flex-shrink:0;
+}
+.coll-card:hover{transform:translateY(-6px);}
+.coll-card-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s ease;}
+.coll-card:hover .coll-card-img{transform:scale(1.06);}
+.coll-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,26,.8) 0%,transparent 50%);}
+.coll-card-body{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:2;}
+.coll-tag{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+.coll-name{font-family:var(--serif);font-size:1.1rem;color:#fff;font-weight:500;margin-bottom:.2rem;}
+.coll-price{font-size:.82rem;color:rgba(255,255,255,.55);}
+.coll-btn{display:inline-block;margin-top:.6rem;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.3);}
 
-    /* Counter + nav */
-    .sh-nav {
-      position: absolute; bottom: 1.5rem; left: 0;
-      display: flex; align-items: center; gap: 1rem;
-      z-index: 12;
-      opacity: 0; animation: fadein .8s 1.8s forwards;
-    }
-    .sh-counter {
-      font-size: .65rem; letter-spacing: .2em; color: rgba(255,255,255,.4);
-    }
-    .sh-lines { display: flex; gap: .4rem; align-items: center; }
-    .sh-line {
-      height: 2px; border-radius: 2px;
-      background: rgba(255,255,255,.25);
-      transition: width .4s cubic-bezier(.4,0,.2,1), background .4s;
-      cursor: pointer;
-    }
-    .sh-line.on { background: #fff; }
+/* Strip arrows */
+.coll-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.2s;z-index:10;
+}
+.coll-arr:hover{background:rgba(255,255,255,.22);}
+.coll-arr svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;}
+.coll-arr-l{left:.5rem;}
+.coll-arr-r{right:.5rem;}
 
-    @keyframes fadein  { to { opacity: 1; } }
-    @keyframes slideup { to { transform: translateY(0); } }
+/* ─── TRUST BAND ──────────────────────────────── */
+.trust-band{
+  background:var(--navy);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.trust-band-inner{
+  max-width:1440px;margin:auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding:2.2rem 3rem;gap:1.5rem;
+}
+.trust-item{display:flex;align-items:flex-start;gap:.9rem;}
+.trust-icon{width:36px;height:36px;flex-shrink:0;opacity:.7;}
+.trust-icon svg{width:100%;height:100%;stroke:rgba(255,255,255,.75);fill:none;stroke-width:1.4;}
+.trust-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.2rem;}
+.trust-desc{font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.6;}
 
-    /* scroll hint */
-    .scroll-hint {
-      position: absolute; bottom: 1.8rem; left: 50%;
-      transform: translateX(-50%);
-      z-index: 10; color: rgba(255,255,255,.3);
-      font-size: .58rem; letter-spacing: .35em; text-transform: uppercase;
-      animation: shbounce 2.5s ease-in-out infinite;
-    }
-    .scroll-hint::after {
-      content: ''; display: block; width: 1px; height: 32px;
-      background: linear-gradient(to bottom, rgba(255,255,255,.3), transparent);
-      margin: .5rem auto 0;
-    }
-    @keyframes shbounce {
-      0%,100% { opacity: .3; transform: translateX(-50%) translateY(0); }
-      50%      { opacity: .55; transform: translateX(-50%) translateY(4px); }
-    }
+/* ─── V2 — WHITE EDITORIAL HERO ──────────────── */
+.hero-v2{
+  min-height:100svh;background:var(--cream);position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.hero-v2::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+.v2-copy{
+  position:relative;z-index:2;
+  padding:0 4rem 4rem 4.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:calc(var(--nav-h) + 3rem);
+}
+.v2-eyebrow{
+  font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:2rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.v2-eyebrow::before{content:'';width:24px;height:1.5px;background:linear-gradient(to right,var(--navy),var(--rouge));flex-shrink:0;}
+.v2-h1{
+  font-family:var(--serif);font-size:clamp(3rem,6vw,6.5rem);
+  font-weight:700;line-height:.9;color:var(--navy);letter-spacing:-.02em;
+}
+.v2-h1 .rg{color:var(--rouge);}
+.v2-sub{margin-top:1.8rem;font-size:.9rem;color:var(--muted);line-height:1.85;max-width:340px;}
+.v2-btn{
+  display:inline-block;margin-top:2.2rem;
+  background:var(--navy);color:#fff;border-radius:2px;
+  padding:.9rem 2rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;font-family:var(--sans);cursor:pointer;transition:.25s;
+}
+.v2-btn:hover{background:var(--rouge);box-shadow:0 6px 24px rgba(208,32,47,.3);}
+.v2-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100px;height:100px;border-radius:50%;border:2px solid var(--rouge);
+  margin-top:2.5rem;position:relative;
+}
+.v2-badge-text{font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rouge);text-align:center;line-height:1.4;}
+.v2-since{font-size:1.2rem;font-weight:700;color:var(--rouge);display:block;}
+.v2-badge-ring{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(208,32,47,.2);
+}
+.v2-product{
+  position:relative;z-index:2;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:calc(var(--nav-h) + 1rem) 2rem 0 1rem;
+  overflow:hidden;
+}
+.v2-product-img{
+  width:auto;height:88%;max-height:700px;object-fit:contain;
+  filter:drop-shadow(0 40px 80px rgba(13,40,85,.2));
+  transform:translateY(8%) rotate(-2deg);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.v2-product:hover .v2-product-img{transform:translateY(6%) rotate(0deg) scale(1.02);}
 
-    /* trust strip */
-    .trust-strip {
-        /* trust strip */
-    .trust-strip {
-      background: var(--sand); border-bottom: 1px solid rgba(22,20,15,.07);
-      padding: .9rem 2.5rem;
-    }
-    .trust-inner {
-      max-width: 1360px; margin: auto;
-      display: flex; gap: 2.5rem; align-items: center; justify-content: center;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: .55rem;
-      font-size: .72rem; color: var(--muted); white-space: nowrap;
-    }
-    .trust-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--fr-red); }
+/* ─── SECTION LABEL ───────────────────────────── */
+.sec-eye{font-size:.58rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--rouge);margin-bottom:.8rem;}
+.sec-h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:500;line-height:1.12;color:var(--navy);}
+.sec-sub{font-size:.84rem;color:var(--muted);line-height:1.85;margin-top:.6rem;}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       VERSION 2 — EDITORIAL STORE / OPTION B (light bg, warm)
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .hero-v2 {
-      min-height: 100svh;
-      position: relative; overflow: hidden;
-      display: grid; grid-template-columns: 1fr 1fr;
-      background: #f2ede5;
-    }
-    /* Blurred bg — same images, different treatment */
-    .hero-v2 .bg-blur {
-      position: absolute; inset: -5%; z-index: 0;
-      background-size: cover; background-position: center;
-      transition: opacity 1.8s ease;
-      filter: blur(40px) brightness(.88) saturate(.7);
-      transform: scale(1.05);
-    }
-    .hero-v2 .bg-blur.on { opacity: 1; }
-    .hero-v2 .bg-blur.off { opacity: 0; }
-    /* light overlay to keep cream feel */
-    .hero-v2 .v2-overlay {
-      position: absolute; inset: 0; z-index: 1;
-      background: rgba(242,237,229,.72);
-      backdrop-filter: blur(2px);
-    }
+/* ─── EXPANDABLE PRODUCT CARDS ────────────────── */
+.products-sec{background:#fff;padding:5rem 0;}
+.products-inner{max-width:1440px;margin:auto;padding:0 3rem;}
+.products-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;}
+.products-see-all{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--muted);transition:.2s;}
+.products-see-all:hover{color:var(--navy);border-color:var(--navy);}
 
-    /* Copy */
-    .v2-copy {
-      padding: 0 4rem 4rem 4rem;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative; z-index: 3;
-      padding-top: calc(var(--nav-h) + 2rem);
-    }
-    .v2-eyebrow {
-      font-size: .6rem; letter-spacing: .45em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 2rem;
-      display: flex; align-items: center; gap: .8rem;
-    }
-    .v2-eyebrow::before {
-      content: ''; width: 24px; height: 1.5px;
-      background: linear-gradient(to right, var(--fr-blue), var(--fr-red));
-    }
-    .v2-h1 {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 5.5vw, 5.8rem);
-      font-weight: 300; line-height: .96;
-      color: var(--ink); letter-spacing: .01em;
-    }
-    .v2-h1 em { font-style: italic; color: var(--fr-blue); }
-    .v2-sub {
-      margin-top: 1.8rem; font-size: .9rem;
-      color: var(--muted); line-height: 1.9; max-width: 380px;
-    }
-    .v2-btns { margin-top: 2.5rem; display: flex; gap: .8rem; flex-wrap: wrap; }
-    .v2-btn-primary {
-      background: var(--ink); color: #fff;
-      border: none; border-radius: 999px;
-      padding: .9rem 2.2rem; font-size: .82rem;
-      font-family: var(--sans); font-weight: 500; cursor: pointer;
-      position: relative; overflow: hidden;
-      transition: transform .3s, box-shadow .3s;
-      display: inline-block;
-    }
-    .v2-btn-primary::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--fr-blue);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .4s cubic-bezier(.4,0,.2,1);
-    }
-    .v2-btn-primary:hover { transform: scale(1.03); box-shadow: 0 6px 24px rgba(0,35,149,.28); }
-    .v2-btn-primary:hover::before { transform: scaleX(1); }
-    .v2-btn-primary span { position: relative; z-index: 1; }
-    .v2-btn-outline {
-      border: 1px solid rgba(22,20,15,.2); background: transparent;
-      border-radius: 999px; padding: .9rem 2.2rem;
-      font-size: .82rem; font-family: var(--sans); cursor: pointer;
-      color: var(--ink); transition: background .25s, color .25s;
-      display: inline-block;
-    }
-    .v2-btn-outline:hover { background: var(--ink); color: #fff; }
-    .v2-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
-    .v2-pill {
-      background: rgba(255,255,255,.7); border: 1px solid rgba(22,20,15,.1);
-      border-radius: 999px; padding: .32rem .85rem; font-size: .7rem; color: var(--muted);
-      backdrop-filter: blur(4px);
-    }
-    .v2-pill.fr { border-left: 3px solid var(--fr-blue); }
+.pc-row{display:flex;gap:0;overflow:hidden;border-radius:1rem;}
+.pc{
+  position:relative;overflow:hidden;cursor:pointer;
+  flex:1;height:580px;transition:flex .6s cubic-bezier(.4,0,.2,1);
+  background:var(--sand);
+}
+.pc:hover,.pc.active{flex:2.5;}
+.pc-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.pc:hover .pc-img,.pc.active .pc-img{transform:scale(1.05);}
+.pc::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,26,.85) 0%,rgba(6,14,26,.1) 60%,transparent 100%);transition:opacity .4s;}
+.pc:not(:hover):not(.active)::after{opacity:.6;}
+.pc-body{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:1.5rem;
+}
+.pc-tag{display:inline-block;font-size:.57rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.pc-name{font-family:var(--serif);font-size:1.2rem;color:#fff;font-weight:500;margin-bottom:.2rem;}
+.pc-price{font-size:.82rem;color:rgba(255,255,255,.55);}
+.pc-desc{
+  font-size:.78rem;color:rgba(255,255,255,.65);line-height:1.7;margin-top:.6rem;
+  max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s;
+  opacity:0;
+}
+.pc:hover .pc-desc,.pc.active .pc-desc{max-height:80px;opacity:1;}
+.pc-cta{
+  display:inline-block;margin-top:.8rem;padding:.5rem 1.2rem;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(8px);border-radius:2px;
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  transform:translateY(8px);opacity:0;transition:.4s;
+}
+.pc:hover .pc-cta,.pc.active .pc-cta{transform:translateY(0);opacity:1;}
 
-    /* Card area — same shuffle component, light version */
-    .v2-cards {
-      position: relative; z-index: 3;
-      display: flex; align-items: center; justify-content: flex-start;
-      padding: 0 2rem 3rem 1rem;
-      padding-top: calc(var(--nav-h) + 2rem);
-    }
-    .v2-cards .shuffle-stage {
-      padding-top: 0;
-      height: min(72vh, 600px);
-    }
-    /* Light-mode card label */
-    .hero-v2 .sh-main-label {
-      background: rgba(250,248,245,.88); backdrop-filter: blur(12px);
-      border: 1px solid rgba(22,20,15,.08);
-    }
-    .hero-v2 .sh-main-tag { color: var(--fr-blue); }
-    .hero-v2 .sh-main-name { color: var(--ink); }
-    .hero-v2 .sh-main-price { color: var(--muted); }
-    .hero-v2 .sh-counter { color: var(--muted); }
-    .hero-v2 .sh-line { background: rgba(22,20,15,.15); }
-    .hero-v2 .sh-line.on { background: var(--ink); }
-    .hero-v2 .sh-thumb::after {
-      background: linear-gradient(transparent, rgba(22,20,15,.55));
-    }
+/* ─── MOSAIC ──────────────────────────────────── */
+.mosaic-sec{background:var(--cream);padding:5rem 0;}
+.mosaic-inner{max-width:1440px;margin:auto;padding:0 3rem;}
+.mosaic-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1.2rem;margin-top:3rem;}
+.mosaic-tile{border-radius:1rem;overflow:hidden;position:relative;cursor:pointer;display:block;}
+.mosaic-tile-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.mosaic-tile:hover .mosaic-tile-img,.mosaic-tile:hover .mt-bg{transform:scale(1.04);}
+.mt-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.mosaic-tile .mt-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;}
+.mt-label{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.5rem;}
+.mt-title{font-family:var(--serif);font-size:clamp(1.3rem,2.5vw,2rem);font-weight:500;line-height:1.1;}
+.mt-link{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:.8rem;display:inline-flex;align-items:center;gap:.4rem;border-bottom:1px solid currentColor;padding-bottom:.15rem;}
+/* Red tile */
+.mt-red{background:var(--rouge);height:320px;}
+.mt-red .mt-overlay{background:linear-gradient(to top,rgba(140,0,20,.4),transparent);}
+.mt-red .mt-label,.mt-red .mt-title,.mt-red .mt-link{color:#fff;}
+/* Cream tile */
+.mt-cream{background:var(--sand);height:320px;}
+.mt-cream .mt-bg{}
+.mt-cream .mt-label{color:var(--muted);}
+.mt-cream .mt-title{color:var(--navy);}
+.mt-cream .mt-link{color:var(--navy);}
+/* Full-width photo tile */
+.mt-photo{grid-column:1/-1;height:380px;}
+.mt-photo .mt-overlay{background:linear-gradient(to right,rgba(6,14,26,.7) 40%,rgba(6,14,26,.1));}
+.mt-photo .mt-label{color:rgba(255,255,255,.5);}
+.mt-photo .mt-title{color:#fff;font-size:clamp(1.6rem,3vw,2.5rem);}
+.mt-photo .mt-link{color:#fff;border-color:rgba(255,255,255,.4);}
 
-    /*     /* version hidden state */
-    .hero-v1, .hero-v2 { display: none; }
-    .hero-v1.on, .hero-v2.on { display: flex; }
-    .hero-v2.on { display: grid; }
+/* ─── NOTRE HISTOIRE ──────────────────────────── */
+.histoire-sec{background:var(--cream);padding:5rem 0;}
+.histoire-inner{max-width:1440px;margin:auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.histoire-img{border-radius:1rem;overflow:hidden;height:440px;position:relative;}
+.histoire-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.histoire-img-accent{position:absolute;bottom:2rem;right:-2rem;width:140px;height:140px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;box-shadow:0 20px 60px rgba(13,40,85,.4);}
+.histoire-copy{}
+.histoire-copy .sec-h2{font-size:clamp(2rem,3.5vw,3.2rem);}
+.histoire-body{font-size:.88rem;color:var(--muted);line-height:1.9;margin-top:1.2rem;}
+.histoire-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--navy);padding-bottom:.15rem;transition:.2s;}
+.histoire-cta:hover{color:var(--rouge);border-color:var(--rouge);}
+.histoire-cta-arrow{font-size:.9rem;}
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SHARED LOWER SECTIONS
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .sec { padding: 5rem 2.5rem; }
-    .sec-inner { max-width: 1360px; margin: auto; }
-    .sec-label { font-size: .6rem; letter-spacing: .38em; text-transform: uppercase; color: var(--muted); }
-    .sec-title { font-family: var(--serif); font-size: clamp(1.8rem,3.2vw,2.8rem); font-weight: 300; line-height: 1.15; margin-top: .35rem; }
-    .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 2.5rem; }
-    .sec-desc { max-width: 360px; font-size: .82rem; color: var(--muted); line-height: 1.85; }
+/* ─── JOURNAL / SUD ───────────────────────────── */
+.journal-sec{background:var(--navy);padding:5rem 0;}
+.journal-inner{max-width:1440px;margin:auto;padding:0 3rem;}
+.journal-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;}
+.journal-head .sec-h2{color:#fff;}
+.journal-head .sec-eye{margin-bottom:.6rem;}
+.journal-see{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.2);transition:.2s;}
+.journal-see:hover{color:#fff;border-color:#fff;}
+.journal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;}
+.jcard{border-radius:1rem;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.3s;}
+.jcard:hover{background:rgba(255,255,255,.08);transform:translateY(-4px);}
+.jcard-img{height:200px;background-size:cover;background-position:center;}
+.jcard-body{padding:1.4rem;}
+.jcard-tag{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.jcard-title{font-family:var(--serif);font-size:1.1rem;color:#fff;font-weight:400;line-height:1.3;}
+.jcard-link{display:inline-block;margin-top:.8rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.15);transition:.2s;}
+.jcard:hover .jcard-link{color:#fff;border-color:#fff;}
 
-    /* Product grid */
-    .pg { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .pc {
-      border-radius: var(--r); overflow: hidden;
-      border: 1px solid rgba(22,20,15,.05);
-      background: #fff; box-shadow: var(--sh);
-      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
-    }
-    .pc:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(22,20,15,.13); }
-    .pc:hover .pc-img { transform: scale(1.05); }
-    .pc-img {
-      aspect-ratio: 4/5;
-      background-size: cover; background-repeat: no-repeat;
-      transition: transform .55s cubic-bezier(.16,1,.3,1);
-    }
-    .pc-img.i1 { background-image: url("images/product-1.jpg"); background-position: center 60%; }
-    .pc-img.i2 { background-image: url("images/product-2.jpg"); background-position: center 50%; }
-    .pc-img.i3 { background-image: url("images/product-3.jpg"); background-position: center 35%; }
-    .pc-body { padding: 1.4rem; }
-    .pc-tag {
-      display: inline-block; background: var(--ink); color: #fff;
-      border-radius: 999px; padding: .2rem .75rem;
-      font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .8rem;
-    }
-    .pc-tag.blue { background: var(--fr-blue); }
-    .pc-tag.red  { background: var(--fr-red); }
-    .pc-row { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
-    .pc-name  { font-family: var(--serif); font-size: 1.2rem; }
-    .pc-price { font-size: .95rem; font-weight: 500; white-space: nowrap; }
-    .pc-desc  { font-size: .8rem; color: var(--muted); margin-top: .5rem; line-height: 1.8; }
-    .pc-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
-    .pc-chip { background: var(--cream); border-radius: 999px; padding: .22rem .7rem; font-size: .66rem; color: var(--muted); }
-    .pc-add {
-      display: block; width: 100%; margin-top: 1rem;
-      background: var(--ink); color: #fff;
-      border-radius: 999px; padding: .72rem;
-      font-size: .78rem; text-align: center; cursor: pointer;
-      font-family: var(--sans); transition: background .25s; border: none;
-    }
-    .pc-add:hover { background: var(--fr-blue); }
+/* ─── FOOTER ──────────────────────────────────── */
+.site-footer{background:var(--navy);}
+/* Top service band */
+.footer-service{
+  background:#1a3568;border-bottom:1px solid rgba(255,255,255,.1);
+  padding:2.5rem 3rem;max-width:none;
+}
+.footer-service-inner{max-width:1440px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;text-align:center;}
+.fsvc{padding:0 2rem;}
+.fsvc:not(:last-child){border-right:1px solid rgba(255,255,255,.1);}
+.fsvc-title{font-size:.82rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:.5rem;}
+.fsvc-phone{font-size:.88rem;font-weight:600;color:var(--bleu-mer,#7087C6);text-decoration:underline;margin-bottom:.2rem;display:block;}
+.fsvc-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.6;}
 
-    /* Sizes + trust two-col */
-    .two { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; }
-    .dark-card {
-      background: var(--ink); color: #fff;
-      border-radius: var(--r); padding: 2.8rem;
-      box-shadow: 0 16px 50px rgba(22,20,15,.22);
-      position: relative; overflow: hidden;
-    }
-    .dark-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(to right, var(--fr-blue) 33%, rgba(255,255,255,.6) 33% 66%, var(--fr-red) 66%);
-    }
-    .dark-card .sec-label { color: rgba(255,255,255,.4); }
-    .dark-card .sec-title { color: #fff; }
-    .dark-card p { font-size: .82rem; opacity: .65; margin-top: .9rem; line-height: 1.85; }
+/* Social + Newsletter */
+.footer-social-row{
+  border-bottom:1px solid rgba(255,255,255,.08);padding:1.6rem 3rem;
+}
+.footer-social-inner{max-width:1440px;margin:auto;display:flex;align-items:center;gap:3rem;}
+.footer-social-label{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.footer-socials{display:flex;gap:.8rem;}
+.footer-soc{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);transition:.2s;text-decoration:none;}
+.footer-soc:hover{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+.footer-soc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;}
+.footer-nl-label{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.footer-nl{display:flex;flex:1;max-width:480px;margin-left:auto;}
+.footer-nl input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-right:none;border-radius:3px 0 0 3px;padding:.7rem 1rem;font-size:.8rem;color:#fff;font-family:var(--sans);}
+.footer-nl input::placeholder{color:rgba(255,255,255,.3);}
+.footer-nl input:focus{outline:none;border-color:rgba(255,255,255,.4);}
+.footer-nl button{background:var(--rouge);border:none;border-radius:0 3px 3px 0;padding:.7rem 1.2rem;cursor:pointer;transition:.2s;}
+.footer-nl button:hover{background:#b8131f;}
+.footer-nl button svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;}
 
-    .size-tbl { margin-top: 2rem; border-radius: 1.3rem; overflow: hidden; border: 1px solid rgba(255,255,255,.1); }
-    .size-tbl table { width: 100%; border-collapse: collapse; font-size: .78rem; }
-    .size-tbl th {
-      background: rgba(255,255,255,.08); padding: .65rem 1rem;
-      text-align: left; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-    .size-tbl td { padding: .6rem 1rem; background: rgba(255,255,255,.03); color: rgba(255,255,255,.78); }
-    .size-tbl tr:not(:last-child) td { border-bottom: 1px solid rgba(255,255,255,.04); }
-    .size-tbl tr:hover td { background: rgba(255,255,255,.06); }
+/* Main footer cols */
+.footer-main{
+  max-width:1440px;margin:auto;padding:3.5rem 3rem;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:3rem;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.footer-brand-col{}
+.footer-logo{height:64px;width:auto;margin-bottom:1.2rem;filter:brightness(0) invert(1);opacity:.8;}
+.footer-tagline{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:#fff;line-height:1.25;margin-bottom:.7rem;}
+.footer-tagline em{font-style:italic;color:var(--gold);}
+.footer-fdesc{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.8;max-width:240px;}
+.fcol-title{font-size:.58rem;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.1rem;padding-bottom:.55rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.fcol-a{display:block;font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:.4rem;transition:.18s;}
+.fcol-a:hover{color:#fff;padding-left:.25rem;}
+.fcol-a.r{color:var(--rouge);}
 
-    .right-stack { display: flex; flex-direction: column; gap: 1.2rem; }
-    .light-card {
-      background: var(--cream); border-radius: var(--r);
-      padding: 1.9rem; border: 1px solid rgba(22,20,15,.06);
-      box-shadow: var(--sh); position: relative; overflow: hidden;
-    }
-    .light-card.fr-top::after {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(to right, var(--fr-blue) 33%, #fff 33% 66%, var(--fr-red) 66%);
-    }
-    .light-card .sec-title { font-size: 1.5rem; }
-    .light-card p { font-size: .82rem; color: var(--muted); margin-top: .6rem; line-height: 1.8; }
-    .pay-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.1rem; }
-    .pay-chip {
-      border: 1px solid rgba(22,20,15,.1); background: #fff;
-      border-radius: 999px; padding: .36rem .85rem; font-size: .72rem;
-      transition: background .2s, color .2s, border-color .2s; cursor: default;
-    }
-    .pay-chip:hover { background: var(--fr-blue); color: #fff; border-color: var(--fr-blue); }
-    .checklist { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: .5rem; }
-    .checklist li {
-      font-size: .82rem; color: var(--muted);
-      display: flex; align-items: center; gap: .6rem;
-    }
-    .checklist li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--fr-red); flex-shrink: 0; }
+/* Bottom bar */
+.footer-bottom-bar{
+  max-width:1440px;margin:auto;padding:1.2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;
+}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-legal a{font-size:.65rem;color:rgba(255,255,255,.3);transition:.2s;}
+.footer-legal a:hover{color:rgba(255,255,255,.7);}
+.footer-payments{display:flex;align-items:center;gap:.5rem;}
+.pay-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .5rem;font-size:.6rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.05em;}
+.footer-copy{font-size:.65rem;color:rgba(255,255,255,.2);}
 
-    /* Footer */
-    .site-footer {
-      background: var(--ink); color: rgba(255,255,255,.65);
-      position: relative; overflow: hidden;
-    }
-    .site-footer::before {
-      content: ''; display: block; height: 3px;
-      background: linear-gradient(to right, var(--fr-blue) 33%, rgba(255,255,255,.4) 33% 66%, var(--fr-red) 66%);
-    }
-    .footer-inner {
-      max-width: 1360px; margin: auto;
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 3.5rem; padding: 4rem 2.5rem;
-    }
-    .footer-brand { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: #fff; margin-top: .4rem; }
-    .footer-desc { font-size: .8rem; margin-top: .8rem; line-height: 1.85; max-width: 300px; }
-    .footer-col h4 {
-      font-size: .68rem; font-weight: 500; letter-spacing: .15em;
-      text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 1rem;
-    }
-    .footer-col a {
-      display: block; font-size: .82rem; color: rgba(255,255,255,.55);
-      margin-bottom: .4rem; transition: color .2s;
-    }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.07);
-      padding: 1.2rem 2.5rem; text-align: center;
-      font-size: .68rem; color: rgba(255,255,255,.28);
-      max-width: 1360px; margin: auto;
-    }
-
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       RESPONSIVE
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    /* ── Responsive ── */
-    @media (max-width: 960px) {
-      .nav-left, .nav-right { display: none; }
-      .hamburger { display: flex; }
-      .mobile-menu { display: block; }
-      .nav-inner { grid-template-columns: auto 1fr auto; }
-      .nav-brand { grid-column: 2; }
-
-      /* V1 mobile: stack copy over stage */
-      .hero-v1 .hero-inner {
-        grid-template-columns: 1fr;
-        padding: 0 1.5rem;
-        gap: 1.5rem;
-        align-items: flex-start;
-        overflow: hidden;
-      }
-      .cin-h1 { font-size: clamp(2.8rem, 11vw, 4.5rem); }
-      .shuffle-stage {
-        height: 260px; min-height: 0;
-        justify-content: center;
-        padding-top: 0;
-      }
-      .sh-main { width: 140px; }
-      .sh-side { gap: .6rem; }
-      .sh-thumb { width: 80px; height: 80px; }
-      .sh-nav { bottom: .5rem; }
-
-      /* V2 mobile */
-      .hero-v2 { grid-template-columns: 1fr; }
-      .v2-cards { display: none; }
-      .v2-copy { padding: calc(var(--nav-h) + 1.5rem) 1.5rem 3rem; }
-
-      .pg { grid-template-columns: 1fr; }
-      .two { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
-      .sec { padding: 3.5rem 1.5rem; }
-    }
-    @media (max-width: 600px) {
-      :root { --nav-h: 62px; }
-      .cin-h1 { font-size: clamp(2.4rem, 13vw, 3.5rem); }
-      .cin-sub { font-size: .8rem; }
-      .cin-btns { flex-direction: column; align-items: flex-start; }
-      .sh-main { width: 120px; }
-      .sh-thumb { width: 68px; height: 68px; }
-    }
-  </style>
+/* ─── RESPONSIVE ──────────────────────────────── */
+@media(max-width:960px){
+  .nav-left,.nav-right .nav-pill,.nav-right .nav-icon{display:none;}
+  .hamburger{display:flex;}
+  .mob-menu{display:block;}
+  .nav-inner{grid-template-columns:auto 1fr auto;gap:0;}
+  .nav-brand{grid-column:2;justify-content:center;}
+  .hero-v1-inner,.hero-v2,.histoire-inner{grid-template-columns:1fr;}
+  .shuffle-stage{height:260px;min-height:0;justify-content:center;padding-top:0;}
+  .sh-main{width:150px;}
+  .sh-thumb{width:85px;height:85px;}
+  .v2-product{display:none;}
+  .v2-copy{padding:calc(var(--nav-h)+2rem) 1.5rem 3rem;}
+  .pc-row{flex-wrap:wrap;}
+  .pc{flex:1 1 45%;height:320px;}
+  .mosaic-grid{grid-template-columns:1fr;}
+  .trust-band-inner{grid-template-columns:1fr 1fr;}
+  .journal-grid{grid-template-columns:1fr;}
+  .footer-main{grid-template-columns:1fr 1fr;gap:2rem;}
+  .footer-service-inner{grid-template-columns:1fr;}
+  .footer-social-inner{flex-wrap:wrap;gap:1rem;}
+}
+@media(max-width:600px){
+  :root{--nav-h:64px;}
+  .cin-h1{font-size:clamp(2.4rem,14vw,3.5rem);}
+  .pc{flex:1 1 100%;}
+  .footer-main{grid-template-columns:1fr;}
+}
+</style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════ HEADER / NAV ═══ -->
-<header class="site-header light" id="siteHeader">
-  <div class="nav-inner">
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<header class="site-header mode-dark" id="hdr">
+<div class="nav-inner">
 
-    <!-- LEFT -->
-    <nav class="nav-left">
-      <!-- FEMME dropdown -->
-      <div class="nav-item">
-        <button class="nav-trigger">
-          Femme <span class="chevron"></span>
-        </button>
-        <div class="mega-drop">
-          <div>
-            <div class="mega-col-title">Espadrilles</div>
-            <a href="women.html" class="mega-link new">Nouveautés</a>
-            <a href="women.html" class="mega-link soldes">Soldes</a>
-            <a href="women.html" class="mega-link">Unies</a>
-            <a href="women.html" class="mega-link">Imprimées</a>
-            <a href="women.html" class="mega-link">Marinières</a>
-            <a href="women.html" class="mega-link">Compensées</a>
-            <a href="women.html" class="mega-link">À lacets</a>
-            <a href="women.html" class="mega-link">Premium</a>
-            <a href="women.html" class="mega-link">Mules</a>
-          </div>
-          <div>
-            <div class="mega-col-title">Collaborations</div>
-            <a href="collections.html" class="mega-link">Coupe du Monde</a>
-            <a href="collections.html" class="mega-link">Harry Potter</a>
-            <a href="collections.html" class="mega-link">Warner Bros</a>
-            <a href="collections.html" class="mega-link">Mariage</a>
-            <a href="collections.html" class="mega-link">Pays &amp; Régions</a>
-            <div class="mega-col-title" style="margin-top:1.2rem">Personnaliser</div>
-            <a href="products.html" class="mega-link">Dessine-moi !</a>
-            <a href="products.html" class="mega-link">Brode-moi !</a>
-          </div>
-          <div>
-            <a href="women.html" class="mega-visual"
-              style="background-image:url('images/campaign-1.jpg')">
-              <span class="mega-visual-label">Summer '26</span>
-            </a>
-          </div>
+  <nav class="nav-left">
+    <div class="nav-item">
+      <button class="nav-trig">Femme <span class="chev"></span></button>
+      <div class="mega-drop">
+        <div>
+          <div class="mc-title">Espadrilles Femme</div>
+          <a href="women.html" class="mc-link new">Nouveautés</a>
+          <a href="women.html" class="mc-link soldes">Soldes</a>
+          <a href="women.html" class="mc-link">Unies</a>
+          <a href="women.html" class="mc-link">Imprimées</a>
+          <a href="women.html" class="mc-link">Marinières</a>
+          <a href="women.html" class="mc-link">Compensées</a>
+          <a href="women.html" class="mc-link">À lacets</a>
+          <a href="women.html" class="mc-link">Premium · Mules</a>
         </div>
-      </div>
-
-      <!-- HOMME dropdown -->
-      <div class="nav-item">
-        <button class="nav-trigger">
-          Homme <span class="chevron"></span>
-        </button>
-        <div class="mega-drop">
-          <div>
-            <div class="mega-col-title">Espadrilles</div>
-            <a href="men.html" class="mega-link new">Nouveautés</a>
-            <a href="men.html" class="mega-link soldes">Soldes</a>
-            <a href="men.html" class="mega-link">Unies</a>
-            <a href="men.html" class="mega-link">Imprimées</a>
-            <a href="men.html" class="mega-link">Marinières</a>
-            <a href="men.html" class="mega-link">Mules</a>
-            <a href="men.html" class="mega-link">Premium</a>
-          </div>
-          <div>
-            <div class="mega-col-title">Collaborations</div>
-            <a href="collections.html" class="mega-link">France Rugby</a>
-            <a href="collections.html" class="mega-link">Stade Toulousain</a>
-            <a href="collections.html" class="mega-link">Goldorak</a>
-            <a href="collections.html" class="mega-link">La Vache qui rit</a>
-            <div class="mega-col-title" style="margin-top:1.2rem">Personnaliser</div>
-            <a href="products.html" class="mega-link">Kit Fabrique ta paire</a>
-          </div>
-          <div>
-            <a href="men.html" class="mega-visual"
-              style="background-image:url('images/campaign-3.jpg')">
-              <span class="mega-visual-label">Homme</span>
-            </a>
-          </div>
+        <div>
+          <div class="mc-title">Collaborations</div>
+          <a href="collections.html" class="mc-link">Coupe du Monde</a>
+          <a href="collections.html" class="mc-link">Harry Potter</a>
+          <a href="collections.html" class="mc-link">Warner Bros</a>
+          <a href="collections.html" class="mc-link">Mariage</a>
+          <a href="collections.html" class="mc-link">Pays &amp; Régions</a>
+          <div class="mc-title" style="margin-top:1.2rem">Personnaliser</div>
+          <a href="products.html" class="mc-link">Dessine-moi !</a>
+          <a href="products.html" class="mc-link">Brode-moi !</a>
         </div>
+        <a href="women.html" class="mc-visual" style="background-image:url('images/campaign-1.jpg')">
+          <span class="mc-vis-label">Summer '26</span>
+        </a>
       </div>
-
-      <!-- Collections -->
-      <a href="collections.html" class="nav-trigger solo">Collections</a>
-      <!-- Story -->
-      <a href="our_story.html" class="nav-trigger solo">Notre histoire</a>
-      <!-- Soldes -->
-      <a href="products.html" class="nav-trigger solo highlight">Soldes</a>
-    </nav>
-
-    <!-- BRAND (center) -->
-    <a href="homepage.html" class="nav-brand">
-      <svg class="brand-logo" viewBox="0 0 120 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- jute sole base -->
-        <rect x="8" y="52" width="104" height="10" rx="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
-        <!-- left canvas panel (blue) -->
-        <path d="M18 52 L22 18 L58 46 L58 52 Z" fill="#002395"/>
-        <!-- right canvas panel (red) -->
-        <path d="M58 52 L58 38 L88 18 L96 52 Z" fill="#ED2939"/>
-        <!-- sole highlight -->
-        <rect x="12" y="56" width="96" height="2.5" rx="1.25" fill="currentColor" opacity="0.15"/>
-      </svg>
-      <div class="brand-wordmark">PAYOTE</div>
-    </a>
-
-    <!-- RIGHT -->
-    <div class="nav-right">
-      <button class="nav-util" onclick="window.i18n && window.i18n.toggle()" id="langBtn">EN / FR</button>
-      <a href="currency_selector.html" class="nav-util">€ / $</a>
-      <a href="shoe_size.html" class="nav-icon" title="Size guide" aria-label="Size guide">
-        <svg viewBox="0 0 24 24"><path d="M3 17l18-6-18-6v4l12 2-12 2v4z" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <a href="payment_shipping_returns.html" class="nav-icon" title="Help" aria-label="Help">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </a>
-      <a href="products.html" class="nav-cart">
-        Panier <span class="cart-count">0</span>
-      </a>
-      <!-- Hamburger (mobile only) -->
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
+    <div class="nav-item">
+      <button class="nav-trig">Homme <span class="chev"></span></button>
+      <div class="mega-drop">
+        <div>
+          <div class="mc-title">Espadrilles Homme</div>
+          <a href="men.html" class="mc-link new">Nouveautés</a>
+          <a href="men.html" class="mc-link soldes">Soldes</a>
+          <a href="men.html" class="mc-link">Unies</a>
+          <a href="men.html" class="mc-link">Marinières</a>
+          <a href="men.html" class="mc-link">Premium · Mules</a>
+        </div>
+        <div>
+          <div class="mc-title">Collaborations</div>
+          <a href="collections.html" class="mc-link">France Rugby</a>
+          <a href="collections.html" class="mc-link">Stade Toulousain</a>
+          <a href="collections.html" class="mc-link">Goldorak</a>
+          <a href="collections.html" class="mc-link">La Vache qui rit</a>
+          <div class="mc-title" style="margin-top:1.2rem">Personnaliser</div>
+          <a href="products.html" class="mc-link">Kit Fabrique ta paire</a>
+        </div>
+        <a href="men.html" class="mc-visual" style="background-image:url('images/campaign-3.jpg')">
+          <span class="mc-vis-label">Homme</span>
+        </a>
+      </div>
+    </div>
+    <a href="collections.html" class="nav-trig" style="padding:0 .9rem">Collections</a>
+    <a href="our_story.html"   class="nav-trig" style="padding:0 .9rem">Notre histoire</a>
+    <a href="products.html"    class="nav-trig red" style="padding:0 .9rem">Soldes</a>
+  </nav>
 
+  <a href="payote-v3.html" class="nav-brand">
+    <img src="images/logo-payote.png" alt="Payote" class="brand-badge"/>
+    <div class="brand-text">
+      <div class="brand-wm">PAYOTE</div>
+      <div class="brand-sub">Espadrilles, Made in France</div>
+    </div>
+  </a>
+
+  <div class="nav-right">
+    <button class="nav-pill" onclick="window.i18n&&window.i18n.toggle()" id="langBtn">FR / EN</button>
+    <a href="currency_selector.html" class="nav-pill">€ / $</a>
+    <a href="shoe_size.html" class="nav-icon" aria-label="Guide tailles">
+      <svg viewBox="0 0 24 24"><path d="M20 6H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"/><path d="M12 6v12M8 10v4M16 10v4"/></svg>
+    </a>
+    <a href="payment_shipping_returns.html" class="nav-icon" aria-label="Aide">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </a>
+    <a href="products.html" class="nav-cart">Panier <span class="cart-n">0</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+
+</div>
 </header>
 
-<!-- ═══════════════════════════════════════ MOBILE MENU ═══ -->
-<nav class="mobile-menu" id="mobileMenu">
-  <div class="mob-section">
-    <div class="mob-section-title">Femme</div>
-    <a href="women.html" class="mob-link red">← Nouveautés</a>
-    <a href="women.html" class="mob-link red">Soldes</a>
-    <a href="women.html" class="mob-link">Unies · Imprimées · Marinières</a>
-    <a href="women.html" class="mob-link">Compensées · Mules · Premium</a>
+<!-- mobile -->
+<nav class="mob-menu" id="mobMenu">
+  <div class="mob-sec"><div class="mob-sec-t">Femme</div>
+    <a href="women.html" class="mob-a r">Nouveautés</a>
+    <a href="women.html" class="mob-a r">Soldes</a>
+    <a href="women.html" class="mob-a">Unies · Imprimées · Marinières</a>
+    <a href="women.html" class="mob-a">Compensées · Lacets · Premium</a>
   </div>
-  <div class="mob-section">
-    <div class="mob-section-title">Homme</div>
-    <a href="men.html" class="mob-link red">← Nouveautés</a>
-    <a href="men.html" class="mob-link red">Soldes</a>
-    <a href="men.html" class="mob-link">Unies · Marinières · Premium</a>
+  <div class="mob-sec"><div class="mob-sec-t">Homme</div>
+    <a href="men.html" class="mob-a r">Nouveautés</a>
+    <a href="men.html" class="mob-a r">Soldes</a>
+    <a href="men.html" class="mob-a">Unies · Marinières · Premium</a>
   </div>
-  <div class="mob-section">
-    <div class="mob-section-title">Explorer</div>
-    <a href="collections.html" class="mob-link">Collections &amp; Collaborations</a>
-    <a href="our_story.html" class="mob-link">Notre histoire</a>
-    <a href="products.html" class="mob-link">Tous les produits</a>
+  <div class="mob-sec"><div class="mob-sec-t">Explorer</div>
+    <a href="collections.html" class="mob-a">Collections &amp; Collaborations</a>
+    <a href="our_story.html" class="mob-a">Notre histoire</a>
+    <a href="products.html" class="mob-a">Tous les produits</a>
   </div>
-  <div class="mob-util-row">
-    <button class="mob-util-btn" onclick="window.i18n && window.i18n.toggle()">EN / FR</button>
+  <div class="mob-utils">
+    <button class="mob-util-btn" onclick="window.i18n&&window.i18n.toggle()">FR / EN</button>
     <a href="currency_selector.html" class="mob-util-btn">€ / $</a>
     <a href="shoe_size.html" class="mob-util-btn">Guide tailles</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════ VERSION 1 — CINEMATIC B ═══ -->
-<div class="hero-v1 on" id="v1">
+<!-- ══════════════════════ V1 — CINEMATIC DARK ══════════════════════ -->
+<div class="v-section on" id="v1">
 
-  <!-- Blurred background layers (cycle) -->
-  <div class="bg-blur on"  style="background-image:url('images/campaign-1.jpg')"></div>
-  <div class="bg-blur off" style="background-image:url('images/campaign-3.jpg')"></div>
-  <div class="bg-blur off" style="background-image:url('images/campaign-2.jpg')"></div>
+  <!-- HERO -->
+  <section class="hero-v1" id="heroV1">
+    <div class="bg-blur on"  style="background-image:url('images/campaign-1.jpg')"></div>
+    <div class="bg-blur off" style="background-image:url('images/campaign-3.jpg')"></div>
+    <div class="bg-blur off" style="background-image:url('images/campaign-2.jpg')"></div>
+    <div class="vignette"></div>
+    <div class="fr-stripe"><span class="fr-b"></span><span class="fr-w"></span><span class="fr-r"></span></div>
 
-  <div class="vignette"></div>
-
-  <!-- FR stripe -->
-  <div class="fr-stripe">
-    <span class="b"></span><span class="w"></span><span class="r"></span>
-  </div>
-
-  <!-- Editorial inner grid -->
-  <div class="hero-inner">
-
-    <!-- LEFT — copy -->
-    <div class="cin-content">
-      <div class="cin-eye">Summer 2026 · Handcrafted in France</div>
-      <h1 class="cin-h1">
-        <span class="line"><span class="li" data-i18n="hero.line1">Wear France.</span></span>
-        <span class="line"><span class="li">Feel the <em data-i18n="hero.line2">Sud.</em></span></span>
-        <span class="line"><span class="li" data-i18n="hero.line3">Ship worldwide.</span></span>
-      </h1>
-      <p class="cin-sub" data-i18n="hero.sub">French-crafted espadrilles. Designed for the world. Available in EUR &amp; USD · EN, FR.</p>
-      <div class="cin-btns">
-        <a href="products.html" class="btn-primary"><span>Discover the collection →</span></a>
-        <a href="our_story.html" class="btn-ghost">Notre histoire</a>
-      </div>
-
-      <!-- progress lines -->
-      <div class="sh-nav">
-        <span class="sh-counter" id="v1counter">1 / 5</span>
-        <div class="sh-lines" id="v1lines">
-          <div class="sh-line on"  style="width:28px" data-idx="0"></div>
-          <div class="sh-line off" style="width:18px" data-idx="1"></div>
-          <div class="sh-line off" style="width:18px" data-idx="2"></div>
-          <div class="sh-line off" style="width:18px" data-idx="3"></div>
-          <div class="sh-line off" style="width:18px" data-idx="4"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT — shuffle stack -->
-    <div class="shuffle-stage" id="v1stage">
-
-      <!-- Big portrait card -->
-      <div class="sh-main">
-        <div class="sh-main-img on"  style="background-image:url('images/product-4.jpg');background-position:center 20%"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-1.jpg');background-position:center 60%"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-2.jpg');background-position:center 50%"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-5.jpg');background-position:center 50%"></div>
-        <div class="sh-main-label">
-          <div class="sh-main-tag" id="v1tag">Premium</div>
-          <div class="sh-main-name" id="v1name">À paillettes</div>
-          <div class="sh-main-price" id="v1price">€59</div>
-        </div>
-      </div>
-
-      <!-- Side thumbnails -->
-      <div class="sh-side">
-        <div class="sh-thumb active" data-idx="0" data-name="À paillettes">
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-        </div>
-        <div class="sh-thumb" data-idx="1" data-name="Espadrille Ruffle">
-          <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-        </div>
-        <div class="sh-thumb" data-idx="2" data-name="Compensée">
-          <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-3.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-        </div>
-        <div class="sh-thumb" data-idx="3" data-name="Marinière">
-          <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="scroll-hint">Scroll</div>
-</div>
-
-<!-- ═══════════════════════════════════════ VERSION 2 — STORE B ═══ -->
-<div class="hero-v2" id="v2">
-
-  <!-- Blurred warm backdrop -->
-  <div class="bg-blur on"  style="background-image:url('images/campaign-2.jpg')"></div>
-  <div class="bg-blur off" style="background-image:url('images/campaign-1.jpg')"></div>
-  <div class="bg-blur off" style="background-image:url('images/campaign-3.jpg')"></div>
-  <div class="v2-overlay"></div>
-
-  <!-- Copy -->
-  <div class="v2-copy">
-    <div class="v2-eyebrow">Summer 2026 · Fait en France</div>
-    <h1 class="v2-h1">
-      Espadrilles<br>françaises,<br><em>pour le monde.</em>
-    </h1>
-    <p class="v2-sub" data-i18n="hero.sub">Fabriquées à Perpignan et au Pays Basque. Disponibles en FR &amp; EN, EUR &amp; USD. Livraison internationale.</p>
-    <div class="v2-btns">
-      <a href="products.html" class="v2-btn-primary"><span>Voir la collection →</span></a>
-      <a href="our_story.html" class="v2-btn-outline">Notre histoire</a>
-    </div>
-    <div class="v2-pills">
-      <span class="v2-pill fr">Livraison mondiale</span>
-      <span class="v2-pill">EN · FR · USD · EUR</span>
-      <span class="v2-pill">Retours 30 jours</span>
-      <span class="v2-pill">Artisanat français</span>
-    </div>
-  </div>
-
-  <!-- Shuffle stack (reused component, light colours) -->
-  <div class="v2-cards">
-    <div class="shuffle-stage" id="v2stage">
-      <div class="sh-main">
-        <div class="sh-main-img on"  style="background-image:url('images/product-5.jpg');background-position:center"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-4.jpg');background-position:center 20%"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-1.jpg');background-position:center 60%"></div>
-        <div class="sh-main-img off" style="background-image:url('images/campaign-2.jpg');background-position:center"></div>
-        <div class="sh-main-img off" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div>
-        <div class="sh-main-label">
-          <div class="sh-main-tag" id="v2tag">Nouveauté</div>
-          <div class="sh-main-name" id="v2name">Mule Glitter</div>
-          <div class="sh-main-price" id="v2price">€49</div>
-        </div>
-      </div>
-      <div class="sh-side">
-        <div class="sh-thumb active" data-idx="0" data-name="Mule Glitter">
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-5.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/campaign-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-        </div>
-        <div class="sh-thumb" data-idx="1" data-name="À paillettes">
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/campaign-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-        </div>
-        <div class="sh-thumb" data-idx="2" data-name="Espadrille Ruffle">
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img on"  style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/campaign-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-        </div>
-        <div class="sh-thumb" data-idx="3" data-name="Collection Fleurs">
-          <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
-          <div class="sh-thumb-img on"  style="background-image:url('images/campaign-2.jpg')"></div>
-          <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
-        </div>
-      </div>
-      <!-- nav lines for v2 -->
-      <div class="sh-nav">
-        <span class="sh-counter" id="v2counter">1 / 5</span>
-        <div class="sh-lines" id="v2lines">
-          <div class="sh-line on"  style="width:28px" data-idx="0"></div>
-          <div class="sh-line off" style="width:18px" data-idx="1"></div>
-          <div class="sh-line off" style="width:18px" data-idx="2"></div>
-          <div class="sh-line off" style="width:18px" data-idx="3"></div>
-          <div class="sh-line off" style="width:18px" data-idx="4"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- trust strip (shown always, below whichever hero) -->
-<div class="trust-strip">
-  <div class="trust-inner">
-    <div class="trust-item"><span class="trust-dot"></span> Livraison mondiale</div>
-    <div class="trust-item"><span class="trust-dot"></span> Paiement sécurisé SSL</div>
-    <div class="trust-item"><span class="trust-dot"></span> EUR &amp; USD acceptés</div>
-    <div class="trust-item"><span class="trust-dot"></span> Retours 30 jours</div>
-    <div class="trust-item"><span class="trust-dot"></span> Fait main en France</div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ SHARED CONTENT ═══ -->
-
-<!-- Products section -->
-<section class="sec" style="background:#fff;">
-  <div class="sec-inner">
-    <div class="sec-head">
+    <div class="hero-v1-inner">
+      <!-- Copy -->
       <div>
-        <div class="sec-label">Featured collection</div>
-        <div class="sec-title">Summer 2026 · Made in France.</div>
-      </div>
-      <p class="sec-desc">Handcrafted espadrilles from Perpignan and the Basque Country. Available in EUR and USD — with a size guide for every market.</p>
-    </div>
-    <div class="pg">
-      <div class="pc">
-        <a href="products.html" style="display:contents">
-          <div class="pc-img i1"></div>
-          <div class="pc-body">
-            <span class="pc-tag blue">Best seller</span>
-            <div class="pc-row">
-              <div class="pc-name">Espadrille Ruffle</div>
-              <div class="pc-price">€39</div>
-            </div>
-            <div class="pc-desc">Signature ruffle in natural canvas — timeless French summer elegance.</div>
-            <div class="pc-chips">
-              <span class="pc-chip">EUR / USD</span>
-              <span class="pc-chip"><a href="shoe_size.html" style="color:inherit">Size guide</a></span>
-              <span class="pc-chip">Secure</span>
-            </div>
-            <div class="pc-add">Shop now →</div>
-          </div>
-        </a>
-      </div>
-      <div class="pc">
-        <a href="products.html" style="display:contents">
-          <div class="pc-img i2"></div>
-          <div class="pc-body">
-            <span class="pc-tag red">New</span>
-            <div class="pc-row">
-              <div class="pc-name">Espadrille Marinière</div>
-              <div class="pc-price">€39</div>
-            </div>
-            <div class="pc-desc">Bold sailor stripe on cream canvas. The Breton spirit, underfoot.</div>
-            <div class="pc-chips">
-              <span class="pc-chip">EUR / USD</span>
-              <span class="pc-chip"><a href="shoe_size.html" style="color:inherit">Size guide</a></span>
-              <span class="pc-chip">Secure</span>
-            </div>
-            <div class="pc-add">Shop now →</div>
-          </div>
-        </a>
-      </div>
-      <div class="pc">
-        <a href="products.html" style="display:contents">
-          <div class="pc-img i3"></div>
-          <div class="pc-body">
-            <span class="pc-tag">International pick</span>
-            <div class="pc-row">
-              <div class="pc-name">Espadrille Compensée</div>
-              <div class="pc-price">€49</div>
-            </div>
-            <div class="pc-desc">Wedge heel with lace-up ribbon. Elevated classic, made in Perpignan.</div>
-            <div class="pc-chips">
-              <span class="pc-chip">EUR / USD</span>
-              <span class="pc-chip"><a href="shoe_size.html" style="color:inherit">Size guide</a></span>
-              <span class="pc-chip">Secure</span>
-            </div>
-            <div class="pc-add">Shop now →</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Sizes + Trust -->
-<section class="sec">
-  <div class="sec-inner">
-    <div class="two">
-      <a href="shoe_size.html" style="display:contents">
-        <div class="dark-card">
-          <div class="sec-label">Size guide</div>
-          <div class="sec-title">EU / US / UK / CM —<br>Find your size, anywhere.</div>
-          <p>Universal size converter. Measure once, order with confidence — from Paris to Helsinki, New York to Tokyo.</p>
-          <div class="size-tbl">
-            <table>
-              <thead><tr><th>EU</th><th>US W</th><th>US M</th><th>UK</th><th>CM</th></tr></thead>
-              <tbody>
-                <tr><td>36</td><td>5.5</td><td>—</td><td>3.5</td><td>23</td></tr>
-                <tr><td>38</td><td>7</td><td>—</td><td>5</td><td>24</td></tr>
-                <tr><td>40</td><td>8.5</td><td>7</td><td>6.5</td><td>25</td></tr>
-                <tr><td>42</td><td>—</td><td>8.5</td><td>8</td><td>26.5</td></tr>
-                <tr><td>44</td><td>—</td><td>10</td><td>9.5</td><td>28</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div style="margin-top:1.5rem;font-size:.72rem;opacity:.45;letter-spacing:.1em;text-transform:uppercase">Full size guide →</div>
+        <div class="cin-eye">Summer 2026 · Fait en France depuis 1975</div>
+        <h1 class="cin-h1">
+          <span class="line"><span class="li">Wear France.</span></span>
+          <span class="line"><span class="li">Feel the <em>Sud.</em></span></span>
+        </h1>
+        <p class="cin-sub">Des espadrilles fabriquées en France, avec passion et savoir-faire depuis 1975.</p>
+        <div class="cin-cta">
+          <a href="products.html" class="btn-primary"><span>Découvrir la collection →</span></a>
+          <a href="our_story.html" class="btn-ghost">Notre histoire</a>
         </div>
-      </a>
-      <div class="right-stack">
-        <a href="payment_shipping_returns.html" style="display:contents">
-          <div class="light-card fr-top">
-            <div class="sec-label">Payments &amp; Shipping</div>
-            <div class="sec-title">Secure checkout,<br>worldwide.</div>
-            <p>All major methods accepted. Colissimo international shipping to 50+ countries.</p>
-            <div class="pay-chips">
-              <span class="pay-chip">Visa</span>
-              <span class="pay-chip">Mastercard</span>
-              <span class="pay-chip">PayPal</span>
-              <span class="pay-chip">Klarna</span>
-              <span class="pay-chip">Apple Pay</span>
-              <span class="pay-chip">Google Pay</span>
-            </div>
+        <div class="sh-nav" style="margin-top:2.5rem">
+          <span class="sh-counter" id="v1cnt">1 / 5</span>
+          <div class="sh-lines" id="v1lines">
+            <div class="sh-line on" style="width:28px" data-i="0"></div>
+            <div class="sh-line off" style="width:18px" data-i="1"></div>
+            <div class="sh-line off" style="width:18px" data-i="2"></div>
+            <div class="sh-line off" style="width:18px" data-i="3"></div>
+            <div class="sh-line off" style="width:18px" data-i="4"></div>
           </div>
-        </a>
-        <div class="light-card">
-          <div class="sec-label">The brand</div>
-          <div class="sec-title">Handcrafted in France</div>
-          <ul class="checklist">
-            <li>Made in Perpignan &amp; Pays Basque</li>
-            <li>Natural jute soles, recycled cotton</li>
-            <li>Fully bilingual — FR &amp; EN</li>
-            <li>EUR &amp; USD at checkout</li>
-            <li>Easy 30-day returns</li>
-          </ul>
+        </div>
+      </div>
+
+      <!-- Shuffle -->
+      <div class="shuffle-stage" id="v1stage">
+        <div class="sh-main">
+          <div class="sh-main-img on"  style="background-image:url('images/product-4.jpg');background-position:center 20%"></div>
+          <div class="sh-main-img off" style="background-image:url('images/product-1.jpg');background-position:center 60%"></div>
+          <div class="sh-main-img off" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div>
+          <div class="sh-main-img off" style="background-image:url('images/product-2.jpg')"></div>
+          <div class="sh-main-img off" style="background-image:url('images/product-5.jpg')"></div>
+          <div class="sh-label">
+            <div class="sh-tag" id="v1tag">Premium</div>
+            <div class="sh-name" id="v1name">À Paillettes</div>
+            <div class="sh-price" id="v1price">€59</div>
+          </div>
+        </div>
+        <div class="sh-side">
+          <div class="sh-thumb active" data-i="0" data-name="À Paillettes">
+            <div class="sh-thumb-img on"  style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-2.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
+          </div>
+          <div class="sh-thumb" data-i="1" data-name="Espadrille Ruffle">
+            <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
+            <div class="sh-thumb-img on"  style="background-image:url('images/product-1.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-2.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
+          </div>
+          <div class="sh-thumb" data-i="2" data-name="Compensée Lacets">
+            <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
+            <div class="sh-thumb-img on"  style="background-image:url('images/product-3.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-2.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
+          </div>
+          <div class="sh-thumb" data-i="3" data-name="Marinière">
+            <div class="sh-thumb-img off" style="background-image:url('images/product-4.jpg');background-position:center 30%"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-1.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-3.jpg')"></div>
+            <div class="sh-thumb-img on"  style="background-image:url('images/product-2.jpg')"></div>
+            <div class="sh-thumb-img off" style="background-image:url('images/product-5.jpg')"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+    <div class="scroll-hint">Scroll</div>
+  </section>
 
-<!-- Footer -->
+  <!-- COLLECTION STRIP -->
+  <div class="coll-strip">
+    <div class="coll-strip-head">
+      <div class="coll-strip-title">Nouvelles collections</div>
+      <a href="collections.html" class="coll-strip-link">Voir tout →</a>
+    </div>
+    <div class="coll-track-wrap">
+      <button class="coll-arr coll-arr-l" id="arrL" aria-label="Précédent">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="coll-track" id="collTrack">
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/campaign-1.jpg')"></div>
+          <div class="coll-card-body"><div class="coll-tag">Été 2026</div><div class="coll-name">Les Unies</div><div class="coll-price">À partir de €39</div><span class="coll-btn">Voir →</span></div>
+        </div>
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/product-2.jpg')"></div>
+          <div class="coll-card-body"><div class="coll-tag">Best seller</div><div class="coll-name">Marinières</div><div class="coll-price">€39</div><span class="coll-btn">Voir →</span></div>
+        </div>
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/campaign-2.jpg')"></div>
+          <div class="coll-card-body"><div class="coll-tag">Collection</div><div class="coll-name">Imprimées Fleurs</div><div class="coll-price">€42</div><span class="coll-btn">Voir →</span></div>
+        </div>
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/product-3.jpg')"></div>
+          <div class="coll-card-body"><div class="coll-tag">Premium</div><div class="coll-name">Compensée Lacets</div><div class="coll-price">€49</div><span class="coll-btn">Voir →</span></div>
+        </div>
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/product-4.jpg');background-position:center 20%"></div>
+          <div class="coll-card-body"><div class="coll-tag">Premium</div><div class="coll-name">À Paillettes</div><div class="coll-price">€59</div><span class="coll-btn">Voir →</span></div>
+        </div>
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/product-5.jpg')"></div>
+          <div class="coll-card-body"><div class="coll-tag">Nouveauté</div><div class="coll-name">Mule Glitter</div><div class="coll-price">€49</div><span class="coll-btn">Voir →</span></div>
+        </div>
+        <div class="coll-card">
+          <div class="coll-card-img" style="background-image:url('images/campaign-3.jpg')"></div>
+          <div class="coll-card-body"><div class="coll-tag">Collection Homme</div><div class="coll-name">Les Classiques</div><div class="coll-price">À partir de €39</div><span class="coll-btn">Voir →</span></div>
+        </div>
+      </div>
+      <button class="coll-arr coll-arr-r" id="arrR" aria-label="Suivant">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- TRUST BAND -->
+  <div class="trust-band">
+    <div class="trust-band-inner">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div><div class="trust-label">Fabriquées en France</div><div class="trust-desc">Dans nos ateliers perpignanais depuis 1975</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div><div class="trust-label">Faites main</div><div class="trust-desc">Chaque paire est unique et authentique</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="trust-label">Éco-responsables</div><div class="trust-desc">Matériaux durables, sourcés avec soin</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><div class="trust-label">L'art de vivre du Sud</div><div class="trust-desc">Un style intemporel, entre terre et mer</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS — expandable cards -->
+  <section class="products-sec">
+    <div class="products-inner">
+      <div class="products-head">
+        <div>
+          <div class="sec-eye">Notre sélection</div>
+          <h2 class="sec-h2">Les incontournables<br>de la saison.</h2>
+        </div>
+        <a href="products.html" class="products-see-all">Voir toute la collection →</a>
+      </div>
+      <div class="pc-row">
+        <div class="pc active">
+          <div class="pc-img" style="background-image:url('images/product-4.jpg');background-position:center 25%"></div>
+          <div class="pc-body">
+            <div class="pc-tag">Premium</div>
+            <div class="pc-name">À Paillettes</div>
+            <div class="pc-price">€59</div>
+            <div class="pc-desc">Espadrille compensée à paillettes dorées. Pour les grandes occasions comme pour le quotidien.</div>
+            <a href="products.html" class="pc-cta">Découvrir →</a>
+          </div>
+        </div>
+        <div class="pc">
+          <div class="pc-img" style="background-image:url('images/product-2.jpg')"></div>
+          <div class="pc-body">
+            <div class="pc-tag">Best seller</div>
+            <div class="pc-name">Marinière</div>
+            <div class="pc-price">€39</div>
+            <div class="pc-desc">La rayure bretonne réinterprétée. Iconique et intemporelle, notre Marinière ne se démode jamais.</div>
+            <a href="products.html" class="pc-cta">Découvrir →</a>
+          </div>
+        </div>
+        <div class="pc">
+          <div class="pc-img" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div>
+          <div class="pc-body">
+            <div class="pc-tag">Été 2026</div>
+            <div class="pc-name">Compensée Lacets</div>
+            <div class="pc-price">€49</div>
+            <div class="pc-desc">La compensée à lacets, signature de nos ateliers depuis des décennies. Confort et élégance à chaque pas.</div>
+            <a href="products.html" class="pc-cta">Découvrir →</a>
+          </div>
+        </div>
+        <div class="pc">
+          <div class="pc-img" style="background-image:url('images/product-5.jpg')"></div>
+          <div class="pc-body">
+            <div class="pc-tag">Nouveauté</div>
+            <div class="pc-name">Mule Glitter</div>
+            <div class="pc-price">€49</div>
+            <div class="pc-desc">La mule pailletée qui illumine chaque tenue. Du coucher de soleil au dîner en terrasse.</div>
+            <a href="products.html" class="pc-cta">Découvrir →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOSAIC -->
+  <section class="mosaic-sec">
+    <div class="mosaic-inner">
+      <div class="sec-eye">Collections &amp; Expériences</div>
+      <h2 class="sec-h2">Plus qu'une paire,<br>une histoire à écrire.</h2>
+      <div class="mosaic-grid">
+        <a href="products.html" class="mosaic-tile mt-red">
+          <div class="mt-overlay">
+            <div class="mt-label">Créez la vôtre</div>
+            <div class="mt-title">Fabrique ta paire à la maison.</div>
+            <span class="mt-link">Découvrir le kit →</span>
+          </div>
+        </a>
+        <a href="collections.html" class="mosaic-tile mt-cream">
+          <div class="mt-bg" style="background-image:url('images/campaign-1.jpg')"></div>
+          <div class="mt-overlay" style="background:linear-gradient(to top,rgba(240,232,220,.95) 30%,rgba(240,232,220,.4))">
+            <div class="mt-label" style="color:var(--muted)">Collection été 2026</div>
+            <div class="mt-title" style="color:var(--navy)">Nouveaux coloris.<br>Nouveau soleil.</div>
+            <span class="mt-link" style="color:var(--navy)">Voir la collection →</span>
+          </div>
+        </a>
+        <a href="our_story.html" class="mosaic-tile mt-photo">
+          <div class="mt-bg" style="background-image:url('images/campaign-3.jpg')"></div>
+          <div class="mt-overlay">
+            <div class="mt-label">Le journal</div>
+            <div class="mt-title">Histoires du Sud, rencontres et savoir-faire.</div>
+            <span class="mt-link">Lire les articles →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTRE HISTOIRE -->
+  <section class="histoire-sec">
+    <div class="histoire-inner">
+      <div class="histoire-img">
+        <div class="histoire-img-bg" style="background-image:url('images/campaign-2.jpg')"></div>
+        <div class="histoire-img-accent">
+          <div style="font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem">Depuis</div>
+          <div style="font-size:1.4rem;font-weight:700;color:#fff;line-height:1">1975</div>
+          <div style="font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem">Perpignan</div>
+        </div>
+      </div>
+      <div class="histoire-copy">
+        <div class="sec-eye">Notre histoire</div>
+        <h2 class="sec-h2">Née dans le Sud<br>de la France.</h2>
+        <p class="histoire-body">Payote, c'est l'histoire d'une famille, d'un territoire et d'un savoir-faire transmis de génération en génération. Née dans le Sud, fabriquée à Perpignan, portée partout dans le monde.<br><br>Des espadrilles authentiques, confortables et durables, conçues dans nos ateliers pour vous offrir le meilleur de l'art de vivre du Sud.</p>
+        <a href="our_story.html" class="histoire-cta">Découvrir notre histoire <span class="histoire-cta-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section class="journal-sec">
+    <div class="journal-inner">
+      <div class="journal-head">
+        <div>
+          <div class="sec-eye">Le journal</div>
+          <h2 class="sec-h2">Histoires du Sud,<br>rencontres et savoir-faire.</h2>
+        </div>
+        <a href="our_story.html" class="journal-see">Lire tous les articles →</a>
+      </div>
+      <div class="journal-grid">
+        <div class="jcard">
+          <div class="jcard-img" style="background-image:url('images/campaign-2.jpg');background-size:cover;background-position:center"></div>
+          <div class="jcard-body">
+            <div class="jcard-tag">Savoir-faire</div>
+            <div class="jcard-title">Le secret d'une bonne espadrille : nos artisans perpignanais</div>
+            <a href="made_in_france.html" class="jcard-link">Lire l'article →</a>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jcard-img" style="background-image:url('images/campaign-3.jpg');background-size:cover;background-position:center"></div>
+          <div class="jcard-body">
+            <div class="jcard-tag">Recyclage</div>
+            <div class="jcard-title">Nos engagements éco-responsables : ce que ça change</div>
+            <a href="recyclage.html" class="jcard-link">Lire l'article →</a>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jcard-img" style="background-image:url('images/campaign-1.jpg');background-size:cover;background-position:center 40%"></div>
+          <div class="jcard-body">
+            <div class="jcard-tag">Nos actions</div>
+            <div class="jcard-title">L'espadrille aux quatre coins du monde : nos marchés internationaux</div>
+            <a href="nos_actions.html" class="jcard-link">Lire l'article →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /v1 -->
+
+<!-- ══════════════════════ V2 — WHITE EDITORIAL ══════════════════════ -->
+<div class="v-section" id="v2">
+
+  <!-- HERO WHITE SPLIT -->
+  <section class="hero-v2">
+    <div class="v2-copy">
+      <div class="v2-eyebrow">Summer 2026 · Espadrilles de France</div>
+      <h1 class="v2-h1">
+        LE STYLE<br>FRANÇAIS.<br>L'ESPRIT<br>DU <span class="rg">SUD.</span>
+      </h1>
+      <p class="v2-sub">Des espadrilles authentiques fabriquées en France avec passion.</p>
+      <a href="products.html" class="v2-btn">Découvrir la collection →</a>
+      <div style="display:flex;align-items:center;gap:1.5rem;margin-top:2.5rem">
+        <div class="v2-badge">
+          <div class="v2-badge-ring"></div>
+          <div class="v2-badge-text">
+            <span style="font-size:.45rem;letter-spacing:.15em;color:var(--rouge);font-weight:700;text-transform:uppercase;display:block;margin-bottom:2px">Made in France</span>
+            <span class="v2-since">1975</span>
+            <span style="font-size:.42rem;letter-spacing:.15em;color:rgba(208,32,47,.6);font-weight:700;text-transform:uppercase;display:block;margin-top:2px">Perpignan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-product">
+      <img src="images/product-3.jpg" alt="Espadrille Compensée Payote" class="v2-product-img"/>
+    </div>
+  </section>
+
+  <!-- SAME TRUST / PRODUCTS / MOSAIC / HISTOIRE / JOURNAL SECTIONS -->
+  <!-- Trust -->
+  <div class="trust-band">
+    <div class="trust-band-inner">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div><div class="trust-label">Fabriquées en France</div><div class="trust-desc">Dans nos ateliers depuis 1975</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div><div class="trust-label">Faites main</div><div class="trust-desc">Chaque paire est unique</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="trust-label">Éco-responsables</div><div class="trust-desc">Matériaux durables et sourcés avec soin</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><div class="trust-label">L'art de vivre du Sud</div><div class="trust-desc">Un style intemporel</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products (shared) -->
+  <section class="products-sec">
+    <div class="products-inner">
+      <div class="products-head">
+        <div><div class="sec-eye">Notre sélection</div><h2 class="sec-h2">Les incontournables<br>de la saison.</h2></div>
+        <a href="products.html" class="products-see-all">Voir toute la collection →</a>
+      </div>
+      <div class="pc-row">
+        <div class="pc active">
+          <div class="pc-img" style="background-image:url('images/product-4.jpg');background-position:center 25%"></div>
+          <div class="pc-body"><div class="pc-tag">Premium</div><div class="pc-name">À Paillettes</div><div class="pc-price">€59</div><div class="pc-desc">Espadrille compensée à paillettes dorées. Pour les grandes occasions.</div><a href="products.html" class="pc-cta">Découvrir →</a></div>
+        </div>
+        <div class="pc">
+          <div class="pc-img" style="background-image:url('images/product-2.jpg')"></div>
+          <div class="pc-body"><div class="pc-tag">Best seller</div><div class="pc-name">Marinière</div><div class="pc-price">€39</div><div class="pc-desc">La rayure bretonne réinterprétée. Iconique et intemporelle.</div><a href="products.html" class="pc-cta">Découvrir →</a></div>
+        </div>
+        <div class="pc">
+          <div class="pc-img" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div>
+          <div class="pc-body"><div class="pc-tag">Été 2026</div><div class="pc-name">Compensée Lacets</div><div class="pc-price">€49</div><div class="pc-desc">Confort et élégance à chaque pas.</div><a href="products.html" class="pc-cta">Découvrir →</a></div>
+        </div>
+        <div class="pc">
+          <div class="pc-img" style="background-image:url('images/product-5.jpg')"></div>
+          <div class="pc-body"><div class="pc-tag">Nouveauté</div><div class="pc-name">Mule Glitter</div><div class="pc-price">€49</div><div class="pc-desc">La mule pailletée qui illumine chaque tenue.</div><a href="products.html" class="pc-cta">Découvrir →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mosaic, histoire, journal (same as V1) -->
+  <section class="mosaic-sec">
+    <div class="mosaic-inner">
+      <div class="sec-eye">Collections &amp; Expériences</div>
+      <h2 class="sec-h2">Plus qu'une paire,<br>une histoire à écrire.</h2>
+      <div class="mosaic-grid">
+        <a href="products.html" class="mosaic-tile mt-red">
+          <div class="mt-overlay"><div class="mt-label">Créez la vôtre</div><div class="mt-title">Fabrique ta paire à la maison.</div><span class="mt-link">Découvrir le kit →</span></div>
+        </a>
+        <a href="collections.html" class="mosaic-tile mt-cream">
+          <div class="mt-bg" style="background-image:url('images/campaign-1.jpg')"></div>
+          <div class="mt-overlay" style="background:linear-gradient(to top,rgba(240,232,220,.95) 30%,rgba(240,232,220,.4))">
+            <div class="mt-label" style="color:var(--muted)">Collection été 2026</div>
+            <div class="mt-title" style="color:var(--navy)">Nouveaux coloris.<br>Nouveau soleil.</div>
+            <span class="mt-link" style="color:var(--navy)">Voir la collection →</span>
+          </div>
+        </a>
+        <a href="our_story.html" class="mosaic-tile mt-photo">
+          <div class="mt-bg" style="background-image:url('images/campaign-3.jpg')"></div>
+          <div class="mt-overlay"><div class="mt-label">Le journal</div><div class="mt-title">Histoires du Sud, rencontres et savoir-faire.</div><span class="mt-link">Lire les articles →</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="histoire-sec">
+    <div class="histoire-inner">
+      <div class="histoire-img">
+        <div class="histoire-img-bg" style="background-image:url('images/campaign-2.jpg')"></div>
+        <div class="histoire-img-accent">
+          <div style="font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem">Depuis</div>
+          <div style="font-size:1.4rem;font-weight:700;color:#fff;line-height:1">1975</div>
+          <div style="font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem">Perpignan</div>
+        </div>
+      </div>
+      <div class="histoire-copy">
+        <div class="sec-eye">Notre histoire</div>
+        <h2 class="sec-h2">Née dans le Sud<br>de la France.</h2>
+        <p class="histoire-body">Payote, c'est l'histoire d'une famille, d'un territoire et d'un savoir-faire transmis de génération en génération.</p>
+        <a href="our_story.html" class="histoire-cta">Découvrir notre histoire <span class="histoire-cta-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="journal-sec">
+    <div class="journal-inner">
+      <div class="journal-head">
+        <div><div class="sec-eye">Le journal</div><h2 class="sec-h2">Histoires du Sud,<br>rencontres et savoir-faire.</h2></div>
+        <a href="our_story.html" class="journal-see">Lire tous les articles →</a>
+      </div>
+      <div class="journal-grid">
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-2.jpg');background-size:cover"></div><div class="jcard-body"><div class="jcard-tag">Savoir-faire</div><div class="jcard-title">Le secret d'une bonne espadrille</div><a href="made_in_france.html" class="jcard-link">Lire →</a></div></div>
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-3.jpg');background-size:cover"></div><div class="jcard-body"><div class="jcard-tag">Recyclage</div><div class="jcard-title">Nos engagements éco-responsables</div><a href="recyclage.html" class="jcard-link">Lire →</a></div></div>
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-1.jpg');background-size:cover;background-position:center 40%"></div><div class="jcard-body"><div class="jcard-tag">Nos actions</div><div class="jcard-title">L'espadrille aux quatre coins du monde</div><a href="nos_actions.html" class="jcard-link">Lire →</a></div></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /v2 -->
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <div class="sec-label" style="color:rgba(255,255,255,.3)">Payote</div>
-      <div class="footer-brand">French espadrilles,<br>shipped worldwide.</div>
-      <p class="footer-desc">Handcrafted in Perpignan and the Pays Basque. Available in FR &amp; EN, EUR &amp; USD. Free returns within 30 days.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Shop</h4>
-      <a href="women.html">Women</a>
-      <a href="men.html">Men</a>
-      <a href="collections.html">Collections</a>
-      <a href="our_story.html">Our story</a>
-    </div>
-    <div class="footer-col">
-      <h4>International</h4>
-      <a href="#" id="footerLangBtn">Language switcher</a>
-      <a href="currency_selector.html">Currency selector</a>
-      <a href="payment_shipping_returns.html">Payments &amp; Shipping</a>
-      <a href="shoe_size.html">Size conversion</a>
+
+  <!-- Service band -->
+  <div class="footer-service">
+    <div class="footer-service-inner">
+      <div class="fsvc">
+        <div class="fsvc-title">Allo Payote ?</div>
+        <a href="tel:0468643224" class="fsvc-phone">04 68 64 32 24</a>
+        <div class="fsvc-desc">Du Lundi au Vendredi<br>9h–13h / 14h–17h</div>
+      </div>
+      <div class="fsvc">
+        <div class="fsvc-title">Paiement sécurisé</div>
+        <div class="fsvc-desc">En une fois, via PayPal, carte bancaire,<br>virement ou chèque.</div>
+      </div>
+      <div class="fsvc">
+        <div class="fsvc-title">Livraison offerte</div>
+        <div class="fsvc-desc">En France<br>dès 45€ d'achat.</div>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 Payote · Espadrilles artisanales de France</div>
+
+  <!-- Socials + newsletter -->
+  <div class="footer-social-row">
+    <div class="footer-social-inner">
+      <span class="footer-social-label">Suivez-nous :</span>
+      <div class="footer-socials">
+        <a href="#" class="footer-soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+      <span class="footer-nl-label">Abonnez-vous :</span>
+      <div class="footer-nl">
+        <input type="email" placeholder="E-mail"/>
+        <button aria-label="S'abonner"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main cols -->
+  <div class="footer-main">
+    <div class="footer-brand-col">
+      <img src="images/logo-payote.png" alt="Payote" class="footer-logo"/>
+      <div class="footer-tagline">Espadrilles,<br><em>Made in France.</em></div>
+      <p class="footer-fdesc">Née dans le Sud de la France. Fabriquée à Perpignan. Portée partout dans le monde.</p>
+    </div>
+    <div>
+      <div class="fcol-title">Boutique</div>
+      <a href="women.html" class="fcol-a">Femme</a>
+      <a href="men.html" class="fcol-a">Homme</a>
+      <a href="collections.html" class="fcol-a">Enfant</a>
+      <a href="products.html" class="fcol-a">Carte cadeau</a>
+      <a href="collections.html" class="fcol-a">Toutes les collections</a>
+    </div>
+    <div>
+      <div class="fcol-title">Informations</div>
+      <a href="payment_shipping_returns.html" class="fcol-a">Suivi de commande</a>
+      <a href="payment_shipping_returns.html" class="fcol-a">Foire aux questions</a>
+      <a href="payment_shipping_returns.html" class="fcol-a">Livraison et retour</a>
+      <a href="our_story.html" class="fcol-a">C'est quoi Payote ?</a>
+    </div>
+    <div>
+      <div class="fcol-title">Contacts</div>
+      <a href="payment_shipping_returns.html" class="fcol-a">Nous contacter</a>
+      <a href="payment_shipping_returns.html" class="fcol-a">Nous rejoindre</a>
+      <a href="payment_shipping_returns.html" class="fcol-a">Devenir revendeur</a>
+      <a href="payment_shipping_returns.html" class="fcol-a">Presse &amp; partenariats</a>
+      <a href="collections.html" class="fcol-a">Collaboration &amp; Influence</a>
+    </div>
+    <div>
+      <div class="fcol-title">Nos boutiques</div>
+      <a href="#" class="fcol-a">Perpignan</a>
+      <a href="#" class="fcol-a">Toulouse</a>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom-bar">
+    <div class="footer-legal">
+      <a href="#">C.G.V</a>
+      <a href="#">Mentions Légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Plan du site</a>
+      <a href="#">Conditions d'utilisation</a>
+      <a href="#">Politique de remboursement</a>
+    </div>
+    <div class="footer-payments">
+      <span class="pay-badge">VISA</span>
+      <span class="pay-badge">MC</span>
+      <span class="pay-badge">PayPal</span>
+      <span class="pay-badge">Klarna</span>
+    </div>
+    <div class="footer-copy">© 2026, Payote</div>
+  </div>
+
 </footer>
 
-<!-- ═══════════════════════════════════════ VERSION SWITCHER PILL ═══ -->
+<!-- VERSION SWITCHER -->
 <div id="vsw">
-  <button class="vbtn active" onclick="switchV(1)">✦ Cinématique</button>
-  <button class="vbtn"        onclick="switchV(2)">◫ Boutique</button>
+  <button class="vbtn on" onclick="switchV(1)">✦ Cinématique</button>
+  <button class="vbtn"    onclick="switchV(2)">◫ Boutique</button>
 </div>
 
 <script>
-  /* ── Header scroll ── */
-  const hdr = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    hdr.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
+const hdr = document.getElementById('hdr');
+const PRODS = [
+  {tag:'Premium',    name:'À Paillettes',    price:'€59'},
+  {tag:'Best seller',name:'Espadrille Ruffle',price:'€39'},
+  {tag:'Été 2026',   name:'Compensée Lacets', price:'€49'},
+  {tag:'Iconique',   name:'Marinière',         price:'€39'},
+  {tag:'Nouveauté',  name:'Mule Glitter',      price:'€49'},
+];
 
-  /* ── Version switcher ── */
-  const vBtns = document.querySelectorAll('.vbtn');
-  function switchV(n) {
-    document.getElementById('v1').classList.toggle('on', n === 1);
-    document.getElementById('v2').classList.toggle('on', n === 2);
-    hdr.classList.toggle('light', n === 1);
-    vBtns.forEach((b, i) => b.classList.toggle('active', i === n - 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+/* ── Scroll header ── */
+window.addEventListener('scroll',()=>{
+  hdr.classList.toggle('scrolled',window.scrollY>50);
+},{passive:true});
 
-  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     SHUFFLE ENGINE — shared by V1 and V2
-     Each "stage" has:
-       .sh-main > .sh-main-img[0..n]    (big portrait)
-       .sh-side > .sh-thumb[0..n] > .sh-thumb-img[0..n]
-       .sh-main-label #tag #name #price
-       #counter  #lines
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── Version switch ── */
+const vBtns = document.querySelectorAll('.vbtn');
+let curV = 1;
+function switchV(n){
+  curV=n;
+  document.getElementById('v1').classList.toggle('on',n===1);
+  document.getElementById('v2').classList.toggle('on',n===2);
+  hdr.classList.toggle('mode-dark',n===1);
+  hdr.classList.toggle('mode-light',n===2);
+  hdr.classList.remove('scrolled');
+  vBtns.forEach((b,i)=>b.classList.toggle('on',i===n-1));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-  const PRODUCTS = [
-    { tag: 'Premium',    name: 'À paillettes',      price: '€59' },
-    { tag: 'Best seller',name: 'Espadrille Ruffle',  price: '€39' },
-    { tag: 'Été 2026',   name: 'Compensée lacets',   price: '€49' },
-    { tag: 'Iconique',   name: 'Marinière',           price: '€39' },
-    { tag: 'Nouveauté',  name: 'Mule Glitter',        price: '€49' },
-  ];
+/* ── Shuffle engine ── */
+function makeShuffler(stageId, counterEl, linesEl, tagEl, nameEl, priceEl, bgSel){
+  const stage = document.getElementById(stageId);
+  if(!stage) return;
+  const mainImgs = stage.querySelectorAll('.sh-main-img');
+  const thumbs   = stage.querySelectorAll('.sh-thumb');
+  const lines    = linesEl ? linesEl.querySelectorAll('.sh-line') : [];
+  const bgBlurs  = bgSel ? document.querySelectorAll(bgSel) : [];
+  let cur=0, timer=null;
+  const N=PRODS.length;
 
-  const PRODUCTS_V2 = [
-    { tag: 'Nouveauté',  name: 'Mule Glitter',        price: '€49' },
-    { tag: 'Premium',    name: 'À paillettes',         price: '€59' },
-    { tag: 'Best seller',name: 'Espadrille Ruffle',    price: '€39' },
-    { tag: 'Collection', name: 'Fleurs sauvages',      price: '€42' },
-    { tag: 'Été 2026',   name: 'Compensée lacets',     price: '€49' },
-  ];
-
-  function makeShuffler(stageId, bgSelector, counterEl, linesEl, tagEl, nameEl, priceEl, products, bgBlurSel) {
-    const stage = document.getElementById(stageId);
-    if (!stage) return;
-
-    const mainImgs  = stage.querySelectorAll('.sh-main-img');
-    const thumbs    = stage.querySelectorAll('.sh-thumb');
-    const lines     = linesEl ? linesEl.querySelectorAll('.sh-line') : [];
-    const bgBlurs   = bgBlurSel ? document.querySelectorAll(bgBlurSel) : [];
-
-    let cur = 0;
-    let timer = null;
-    const N = products.length;
-
-    function go(idx, fromUser) {
-      const prev = cur;
-      cur = ((idx % N) + N) % N;
-
-      // main image crossfade
-      mainImgs.forEach((img, i) => {
-        img.classList.toggle('on',  i === cur);
-        img.classList.toggle('off', i !== cur);
-      });
-
-      // thumbnails: each thumb shows its own matching image
-      thumbs.forEach((th, ti) => {
-        const imgs = th.querySelectorAll('.sh-thumb-img');
-        imgs.forEach((img, i) => {
-          img.classList.toggle('on',  i === cur);
-          img.classList.toggle('off', i !== cur);
-        });
-        th.classList.toggle('active', ti === cur);
-      });
-
-      // label
-      if (tagEl)   tagEl.textContent   = products[cur].tag;
-      if (nameEl)  nameEl.textContent  = products[cur].name;
-      if (priceEl) priceEl.textContent = products[cur].price;
-
-      // counter
-      if (counterEl) counterEl.textContent = (cur + 1) + ' / ' + N;
-
-      // progress lines
-      lines.forEach((l, i) => {
-        l.classList.toggle('on',  i === cur);
-        l.classList.toggle('off', i !== cur);
-        l.style.width = i === cur ? '28px' : '18px';
-      });
-
-      // background blur swap (every 2 steps)
-      if (bgBlurs.length && cur % 2 === 0) {
-        const bi = Math.floor(cur / 2) % bgBlurs.length;
-        bgBlurs.forEach((b, i) => {
-          b.classList.toggle('on',  i === bi);
-          b.classList.toggle('off', i !== bi);
-        });
-      }
-
-      // restart auto-timer on user interaction
-      if (fromUser) {
-        clearInterval(timer);
-        timer = setInterval(() => go(cur + 1, false), 4200);
-      }
+  function go(idx, user){
+    cur=((idx%N)+N)%N;
+    mainImgs.forEach((img,i)=>{img.classList.toggle('on',i===cur);img.classList.toggle('off',i!==cur);});
+    thumbs.forEach((th,ti)=>{
+      th.querySelectorAll('.sh-thumb-img').forEach((img,i)=>{img.classList.toggle('on',i===cur);img.classList.toggle('off',i!==cur);});
+      th.classList.toggle('active',ti===cur);
+    });
+    if(tagEl)   tagEl.textContent   = PRODS[cur].tag;
+    if(nameEl)  nameEl.textContent  = PRODS[cur].name;
+    if(priceEl) priceEl.textContent = PRODS[cur].price;
+    if(counterEl) counterEl.textContent = (cur+1)+' / '+N;
+    lines.forEach((l,i)=>{l.classList.toggle('on',i===cur);l.classList.toggle('off',i!==cur);l.style.width=i===cur?'28px':'18px';});
+    if(bgBlurs.length && cur%2===0){
+      const bi=Math.floor(cur/2)%bgBlurs.length;
+      bgBlurs.forEach((b,i)=>{b.classList.toggle('on',i===bi);b.classList.toggle('off',i!==bi);});
     }
-
-    // Click thumbs
-    thumbs.forEach((th, ti) => {
-      th.addEventListener('click', () => go(ti, true));
-    });
-
-    // Click lines
-    lines.forEach((l, li) => {
-      l.addEventListener('click', () => go(li, true));
-    });
-
-    // Auto-shuffle
-    timer = setInterval(() => go(cur + 1, false), 4200);
-
-    return { go };
+    if(user){clearInterval(timer);timer=setInterval(()=>go(cur+1,false),4200);}
   }
 
-  // Init V1 shuffler
-  makeShuffler(
-    'v1stage',
-    null,
-    document.getElementById('v1counter'),
-    document.getElementById('v1lines'),
-    document.getElementById('v1tag'),
-    document.getElementById('v1name'),
-    document.getElementById('v1price'),
-    PRODUCTS,
-    '#v1 .bg-blur'
-  );
+  thumbs.forEach((th,ti)=>th.addEventListener('click',()=>go(ti,true)));
+  lines.forEach((l,li)=>l.addEventListener('click',()=>go(li,true)));
+  timer=setInterval(()=>go(cur+1,false),4200);
+}
 
-  // Init V2 shuffler
-  makeShuffler(
-    'v2stage',
-    null,
-    document.getElementById('v2counter'),
-    document.getElementById('v2lines'),
-    document.getElementById('v2tag'),
-    document.getElementById('v2name'),
-    document.getElementById('v2price'),
-    PRODUCTS_V2,
-    '#v2 .bg-blur'
-  );
+makeShuffler('v1stage',
+  document.getElementById('v1cnt'),
+  document.getElementById('v1lines'),
+  document.getElementById('v1tag'),
+  document.getElementById('v1name'),
+  document.getElementById('v1price'),
+  '#v1 .hero-v1 .bg-blur'
+);
 
-  /* ── Mobile hamburger ── */
-  const ham = document.getElementById('hamburger');
-  const mob = document.getElementById('mobileMenu');
-  ham.addEventListener('click', () => {
-    ham.classList.toggle('open');
-    mob.classList.toggle('open');
-    document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+/* ── Expandable product cards ── */
+document.querySelectorAll('.pc').forEach(pc=>{
+  pc.addEventListener('mouseenter',()=>{
+    pc.closest('.pc-row').querySelectorAll('.pc').forEach(p=>p.classList.remove('active'));
+    pc.classList.add('active');
   });
+});
 
-  /* ── Footer lang trigger ── */
-  document.getElementById('footerLangBtn').addEventListener('click', e => {
-    e.preventDefault();
-    window.i18n && window.i18n.toggle();
-  });
+/* ── Collection strip arrows ── */
+const track = document.getElementById('collTrack');
+const arrL  = document.getElementById('arrL');
+const arrR  = document.getElementById('arrR');
+if(track&&arrL&&arrR){
+  const scroll=(dir)=>track.scrollBy({left:dir*280,behavior:'smooth'});
+  arrL.addEventListener('click',()=>scroll(-1));
+  arrR.addEventListener('click',()=>scroll(1));
+}
+
+/* ── Mobile hamburger ── */
+const ham=document.getElementById('hamburger');
+const mob=document.getElementById('mobMenu');
+ham.addEventListener('click',()=>{
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+  document.body.style.overflow=mob.classList.contains('open')?'hidden':'';
+});
+
+/* ── Footer lang ── */
+const footLang=document.querySelector('#footerLangBtn');
+if(footLang) footLang.addEventListener('click',e=>{e.preventDefault();window.i18n&&window.i18n.toggle();});
 </script>
 </body>
 </html>
