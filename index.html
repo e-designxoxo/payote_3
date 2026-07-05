@@ -10,11 +10,12 @@
     :root {
       --blue: #002395;
       --red:  #ED2939;
-      --ink:  #0c0b09;
+      --ink:  #061a3d;
+      --deep: #000026;
       --sans: "Outfit", system-ui, sans-serif;
       --serif:"Cormorant Garamond", Georgia, serif;
     }
-    html, body { width:100%; height:100%; overflow:hidden; background:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+    html, body { width:100%; height:100%; overflow:hidden; background:var(--deep); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
 
     body::after {
       content:""; position:fixed; inset:0; z-index:100;
@@ -109,7 +110,7 @@
       background:none; border:none; font-family:var(--sans);
       font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase;
       color:rgba(255,255,255,0.18); cursor:pointer;
-      opacity:0; animation:riseIn 0.6s 3.2s ease forwards;
+      opacity:0; animation:riseIn 0.6s 0.7s ease forwards;
       transition:color 0.2s; z-index:20;
     }
     #skip-btn:hover { color:rgba(255,255,255,0.45); }
@@ -123,7 +124,7 @@
       position:fixed; inset:0; z-index:1; background:#faf8f5;
       display:flex; align-items:center; justify-content:center;
       font-family:var(--serif); font-size:2.8rem; font-weight:300;
-      color:#16140f; letter-spacing:0.04em;
+      color:#00001f; letter-spacing:0.04em;
       opacity:0; transition:opacity 0.9s 0.15s ease;
     }
     #destination.visible { opacity:1; }
@@ -143,21 +144,27 @@
     </div>
   </div>
   <div id="tagline">Espadrilles &nbsp;·&nbsp; Handcrafted in France</div>
-  <button id="enter-btn" onclick="enter()"><span>Enter the boutique &nbsp;→</span></button>
+  <button id="enter-btn" type="button" onclick="enter()"><span>Enter the boutique &nbsp;→</span></button>
 </div>
 
-<button id="skip-btn" onclick="enter()">Skip</button>
+<button id="skip-btn" type="button" onclick="skipIntro()">Skip</button>
 <div id="destination">Welcome to Payote.</div>
 
 <script>
+  const HOMEPAGE_URL = "homepage.html";
+
   function enter() {
     document.getElementById("stage").classList.add("out");
     document.getElementById("fr-line").classList.add("out");
     document.getElementById("destination").classList.add("visible");
     // Brief welcome flash, then navigate
     setTimeout(() => {
-      window.location.href = "homepage.html";
+      window.location.href = HOMEPAGE_URL;
     }, 900);
+  }
+
+  function skipIntro() {
+    window.location.href = HOMEPAGE_URL;
   }
 </script>
 </body>
