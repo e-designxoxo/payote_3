@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PAYOTE · Espadrilles Artisanales Made in France</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0D2855;--rouge:#D0202F;--cream:#FAF7F2;--sand:#F0E8DC;
+  --gold:#C4A46B;--muted:#5a6475;--bleu:#2E3A48;
+  --serif:'Playfair Display',Georgia,serif;--sans:'Montserrat',system-ui,sans-serif;
+  --top-h:36px;--nav-h:72px;--total-h:108px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--bleu);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ══ TOPPER BAR ══════════════════════════════════════════════════════ */
+.topper{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:var(--top-h);
+  background:var(--navy);
+  display:flex;align-items:center;
+}
+.topper-inner{
+  max-width:1440px;margin:auto;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+}
+.topper-left{
+  font-size:.65rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.75);
+}
+.topper-right{
+  display:flex;gap:1.8rem;
+}
+.topper-right a{
+  font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);transition:color .2s;
+}
+.topper-right a:hover{color:#fff;}
+
+/* ══ MAIN NAV ════════════════════════════════════════════════════════ */
+.site-header{
+  position:fixed;top:var(--top-h);left:0;right:0;z-index:200;
+  height:var(--nav-h);
+  background:rgba(255,255,255,0);
+  transition:background .35s,border-color .35s,box-shadow .35s;
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{
+  background:rgba(255,255,255,.97);
+  border-color:rgba(13,40,85,.08);
+  box-shadow:0 2px 24px rgba(13,40,85,.06);
+}
+
+.nav-inner{
+  max-width:1440px;margin:auto;height:100%;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;padding:0 2rem;gap:1rem;
+}
+
+/* LEFT */
+.nav-left{display:flex;align-items:center;gap:0;height:100%;}
+.nav-item{position:relative;display:flex;align-items:center;height:100%;}
+.nav-trig{
+  display:flex;align-items:center;gap:.28rem;
+  padding:0 .85rem;height:100%;
+  font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  border:none;background:none;font-family:var(--sans);cursor:pointer;
+  color:var(--navy);white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+/* over dark hero → white */
+.header-dark .nav-trig{color:rgba(255,255,255,.85);}
+.header-dark.scrolled .nav-trig{color:var(--navy);}
+.nav-trig:hover{border-bottom-color:var(--rouge);}
+.header-dark .nav-trig:hover{color:#fff;}
+.nav-trig.soldes{color:var(--rouge)!important;font-weight:700;}
+.chev{
+  width:6px;height:6px;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translateY(-1px);transition:transform .22s;opacity:.5;
+}
+.nav-item:hover>.nav-trig .chev{transform:rotate(225deg) translateY(2px);opacity:1;}
+
+/* BRAND CENTER */
+.nav-brand{display:flex;flex-direction:column;align-items:center;text-decoration:none;}
+.brand-logo-img{
+  height:52px;width:auto;
+  transition:filter .35s;
+}
+/* over dark hero → invert to white */
+.header-dark .brand-logo-img{filter:brightness(0) invert(1);}
+.header-dark.scrolled .brand-logo-img{filter:none;}
+
+/* RIGHT */
+.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;}
+.nav-lang{
+  font-size:.68rem;font-weight:600;letter-spacing:.06em;
+  color:var(--navy);cursor:pointer;border:none;background:none;
+  font-family:var(--sans);padding:.3rem .5rem;transition:color .2s;
+}
+.header-dark .nav-lang{color:rgba(255,255,255,.75);}
+.header-dark.scrolled .nav-lang{color:var(--navy);}
+.nav-lang:hover{color:var(--rouge);}
+.nav-icon-btn{
+  width:36px;height:36px;border-radius:50%;border:none;background:none;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s;
+}
+.nav-icon-btn:hover{background:rgba(13,40,85,.06);}
+.header-dark .nav-icon-btn:hover{background:rgba(255,255,255,.1);}
+.nav-icon-btn svg{width:18px;height:18px;fill:none;stroke-width:1.6;stroke:var(--navy);}
+.header-dark .nav-icon-btn svg{stroke:#fff;}
+.header-dark.scrolled .nav-icon-btn svg{stroke:var(--navy);}
+.nav-cart-btn{
+  display:flex;align-items:center;gap:.35rem;
+  padding:.42rem 1rem;
+  background:transparent;border:1.5px solid var(--navy);border-radius:99px;
+  font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--navy);font-family:var(--sans);cursor:pointer;transition:.2s;
+  text-decoration:none;
+}
+.header-dark .nav-cart-btn{border-color:rgba(255,255,255,.6);color:#fff;}
+.header-dark.scrolled .nav-cart-btn{border-color:var(--navy);color:var(--navy);}
+.nav-cart-btn:hover{background:var(--navy);color:#fff!important;border-color:var(--navy);}
+.cart-badge{
+  background:var(--rouge);color:#fff;border-radius:50%;
+  width:16px;height:16px;font-size:.55rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;cursor:pointer;align-items:center;justify-content:center;border:none;background:none;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--navy);border-radius:2px;transition:.3s;}
+.header-dark .hamburger span{background:#fff;}
+.header-dark.scrolled .hamburger span{background:var(--navy);}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,4px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-4px);}
+
+/* MEGA DROPDOWN */
+.mega-drop{
+  position:absolute;top:calc(100% + 1px);left:0;
+  background:#fff;
+  border-top:3px solid var(--navy);
+  border-radius:0 0 1rem 1rem;
+  box-shadow:0 20px 60px rgba(13,40,85,.14);
+  padding:2rem 2.2rem 2.2rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .18s,transform .18s;
+  transform:translateY(6px);
+  min-width:660px;
+  display:grid;grid-template-columns:1.3fr 1fr 190px;gap:2rem;
+  z-index:400;
+}
+.nav-item:hover>.mega-drop{opacity:1;pointer-events:all;transform:translateY(0);}
+.mc-title{
+  font-size:.57rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.9rem;padding-bottom:.5rem;
+  border-bottom:1.5px solid var(--sand);
+}
+.mc-link{
+  display:flex;align-items:center;
+  font-size:.82rem;color:var(--bleu);padding:.33rem 0;
+  transition:color .15s,padding-left .15s;
+}
+.mc-link:hover{color:var(--navy);padding-left:.4rem;}
+.mc-link.new{color:var(--rouge);font-weight:600;}
+.mc-link.soldes-l{color:var(--rouge);}
+.mc-visual{
+  border-radius:.8rem;overflow:hidden;aspect-ratio:3/4;
+  background-size:cover;background-position:center;
+  display:block;position:relative;
+  transition:transform .3s;
+}
+.mc-visual:hover{transform:scale(1.02);}
+.mc-visual::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(13,40,85,.65),transparent 55%);
+}
+.mc-vis-lbl{
+  position:absolute;bottom:.8rem;left:.8rem;z-index:1;
+  font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+}
+
+/* Mobile menu */
+.mob-menu{
+  display:none;position:fixed;top:var(--total-h);left:0;right:0;bottom:0;
+  background:#fff;z-index:190;overflow-y:auto;
+  padding:2rem 1.5rem 3rem;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.mob-menu.open{transform:translateX(0);}
+.mob-sec{margin-bottom:2rem;}
+.mob-sec-t{font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid var(--sand);}
+.mob-a{display:block;padding:.65rem 0;font-size:.9rem;color:var(--bleu);border-bottom:1px solid rgba(13,40,85,.05);}
+.mob-a.r{color:var(--rouge);font-weight:600;}
+.mob-utils{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem;}
+.mob-util-btn{flex:1;min-width:110px;padding:.75rem 1rem;text-align:center;border:1px solid rgba(13,40,85,.15);border-radius:99px;font-size:.75rem;color:var(--navy);background:transparent;font-family:var(--sans);cursor:pointer;}
+
+/* ══ VERSION SWITCHER ════════════════════════════════════════════════ */
+#vsw{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+  z-index:600;display:flex;gap:.25rem;
+  background:rgba(6,14,26,.88);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.12);border-radius:99px;
+  padding:.35rem;box-shadow:0 8px 40px rgba(0,0,0,.4);
+}
+.vbtn{border:none;border-radius:99px;padding:.48rem 1.3rem;font-size:.68rem;font-family:var(--sans);font-weight:500;letter-spacing:.08em;cursor:pointer;transition:.25s;color:rgba(255,255,255,.4);background:transparent;white-space:nowrap;}
+.vbtn.on{background:#fff;color:var(--navy);}
+
+/* ══ V-SECTION TOGGLE ════════════════════════════════════════════════ */
+.v-section{display:none;}
+.v-section.on{display:block;}
+
+/* ══════════════════════════════════════════════════════════════════════
+   V1 — CINEMATIC HERO (exactly like reference: sharp full-bleed photo)
+══════════════════════════════════════════════════════════════════════ */
+.hero-v1{
+  position:relative;
+  width:100%;height:100svh;min-height:600px;
+  overflow:hidden;
+}
+/* THE PHOTO — sharp, full-bleed, no blur */
+.hero-photo{
+  position:absolute;inset:0;
+  background-image:url('images/hero-1.png');
+  background-size:cover;
+  background-position:center 30%;
+  z-index:0;
+}
+/* Gradient overlay — left side for text readability, fades right */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    to right,
+    rgba(4,10,22,.55) 0%,
+    rgba(4,10,22,.35) 38%,
+    rgba(4,10,22,.0) 70%
+  );
+}
+/* Subtle bottom fade */
+.hero-overlay::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:35%;
+  background:linear-gradient(to top,rgba(4,10,22,.4),transparent);
+}
+
+/* COPY — sits in bottom-left, matching reference */
+.hero-copy{
+  position:absolute;
+  bottom:0;left:0;right:0;z-index:10;
+  padding:0 3rem 4.5rem;
+  max-width:720px;
+}
+.hero-eyebrow{
+  font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);margin-bottom:1.4rem;
+  font-weight:500;
+}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,6.5vw,6.8rem);
+  font-weight:400;line-height:1.0;
+  color:#fff;letter-spacing:-.01em;
+  margin-bottom:1.6rem;
+}
+.hero-h1 em{font-style:italic;color:#c4785a;}   /* warm terracotta-red, like reference */
+.hero-sub{
+  font-size:.9rem;color:rgba(255,255,255,.65);
+  line-height:1.75;margin-bottom:2.2rem;
+  max-width:380px;font-weight:400;
+}
+/* CTA — outlined white rectangle, exactly like reference */
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.8rem 1.8rem;
+  border:1.5px solid rgba(255,255,255,.7);
+  background:transparent;border-radius:0;
+  font-family:var(--sans);font-size:.72rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  cursor:pointer;transition:background .25s,border-color .25s;
+}
+.hero-cta:hover{background:rgba(255,255,255,.12);border-color:#fff;}
+.hero-cta-arrow{font-size:.9rem;}
+
+/* ══════════════════════════════════════════════════════════════════════
+   V2 — WHITE EDITORIAL HERO (reference: white split, product photo)
+══════════════════════════════════════════════════════════════════════ */
+.hero-v2{
+  min-height:100svh;
+  background:var(--cream);
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.v2-copy{
+  padding:0 3.5rem 4rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:calc(var(--total-h) + 3rem);
+  position:relative;z-index:2;
+}
+.v2-eyebrow{
+  font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.8rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.v2-eyebrow::before{content:'';width:24px;height:1.5px;background:linear-gradient(to right,var(--navy),var(--rouge));flex-shrink:0;}
+.v2-h1{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,6vw,6.2rem);
+  font-weight:700;line-height:.9;color:var(--navy);letter-spacing:-.02em;
+}
+.v2-h1 .rg{color:var(--rouge);}
+.v2-sep{width:40px;height:2px;background:var(--rouge);margin:1.8rem 0;}
+.v2-sub{font-size:.9rem;color:var(--muted);line-height:1.8;max-width:340px;margin-bottom:2.2rem;}
+.v2-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.8rem;
+  background:var(--navy);color:#fff;border:none;border-radius:0;
+  font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--sans);cursor:pointer;transition:.25s;text-decoration:none;
+}
+.v2-btn:hover{background:var(--rouge);}
+.v2-badge{
+  margin-top:2.5rem;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:96px;height:96px;border-radius:50%;
+  border:2px solid var(--rouge);position:relative;
+}
+.v2-badge::before{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(208,32,47,.18);}
+.v2-since{font-size:1.3rem;font-weight:700;color:var(--rouge);display:block;line-height:1;}
+.v2-badge-label{font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(208,32,47,.6);font-weight:700;display:block;margin:.2rem 0;}
+.v2-product-area{
+  position:relative;z-index:2;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-top:calc(var(--total-h) + 2rem);
+  overflow:hidden;
+}
+.v2-product-img{
+  height:82%;max-height:680px;width:auto;object-fit:contain;
+  transform:translateY(6%) rotate(-3deg);
+  filter:drop-shadow(0 40px 80px rgba(13,40,85,.18));
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.v2-product-area:hover .v2-product-img{transform:translateY(4%) rotate(-1deg) scale(1.02);}
+
+/* ══ COLLECTION SHUFFLE STRIP ════════════════════════════════════════ */
+.coll-strip{background:var(--navy);padding:2.5rem 0 0;overflow:hidden;}
+.coll-head{max-width:1440px;margin:0 auto;padding:0 3rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;}
+.coll-title{font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:500;color:#fff;}
+.coll-see{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.2);transition:.2s;}
+.coll-see:hover{color:#fff;border-color:#fff;}
+.coll-wrap{position:relative;padding:0 3rem 2.5rem;}
+.coll-track{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:.5rem;}
+.coll-track::-webkit-scrollbar{display:none;}
+.coll-card{flex:0 0 250px;height:340px;border-radius:1rem;overflow:hidden;position:relative;scroll-snap-align:start;cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.coll-card:hover{transform:translateY(-6px);}
+.coll-card-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s;}
+.coll-card:hover .coll-card-img{transform:scale(1.06);}
+.coll-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,26,.82) 0%,transparent 50%);}
+.coll-body{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:2;}
+.coll-tag{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+.coll-name{font-family:var(--serif);font-size:1.05rem;color:#fff;font-weight:500;margin-bottom:.15rem;}
+.coll-price{font-size:.8rem;color:rgba(255,255,255,.5);}
+.coll-link{display:inline-block;margin-top:.5rem;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.3);}
+.coll-arr{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;z-index:10;}
+.coll-arr:hover{background:rgba(255,255,255,.2);}
+.coll-arr svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;}
+.arr-l{left:.5rem;}.arr-r{right:.5rem;}
+
+/* ══ TRUST BAND ══════════════════════════════════════════════════════ */
+.trust-band{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);}
+.trust-inner{max-width:1440px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:2rem 3rem;gap:1.5rem;}
+.ti{display:flex;align-items:flex-start;gap:.85rem;}
+.ti-icon{width:32px;height:32px;flex-shrink:0;opacity:.65;}
+.ti-icon svg{width:100%;height:100%;stroke:rgba(255,255,255,.8);fill:none;stroke-width:1.5;}
+.ti-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.18rem;}
+.ti-desc{font-size:.7rem;color:rgba(255,255,255,.42);line-height:1.55;}
+
+/* ══ PRODUCTS — EXPAND ON HOVER ══════════════════════════════════════ */
+.products-sec{background:#fff;padding:5rem 0;}
+.products-inner{max-width:1440px;margin:auto;padding:0 3rem;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;}
+.sec-eye{font-size:.57rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--rouge);margin-bottom:.7rem;}
+.sec-h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:500;line-height:1.1;color:var(--navy);}
+.sec-see{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid currentColor;transition:.2s;}
+.sec-see:hover{color:var(--navy);}
+
+.pc-row{display:flex;gap:0;border-radius:1rem;overflow:hidden;}
+.pc{position:relative;overflow:hidden;cursor:pointer;flex:1;height:580px;transition:flex .65s cubic-bezier(.4,0,.2,1);}
+.pc:hover,.pc.active{flex:2.5;}
+.pc-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .65s cubic-bezier(.4,0,.2,1);}
+.pc:hover .pc-img,.pc.active .pc-img{transform:scale(1.05);}
+.pc::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,26,.88) 0%,rgba(6,14,26,.08) 65%,transparent 100%);transition:opacity .4s;}
+.pc:not(:hover):not(.active)::after{opacity:.65;}
+.pc-body{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem;}
+.pc-tag{font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem;}
+.pc-name{font-family:var(--serif);font-size:1.15rem;color:#fff;font-weight:500;margin-bottom:.15rem;}
+.pc-price{font-size:.82rem;color:rgba(255,255,255,.5);}
+.pc-desc{font-size:.76rem;color:rgba(255,255,255,.62);line-height:1.7;margin-top:.6rem;max-height:0;overflow:hidden;opacity:0;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s;}
+.pc:hover .pc-desc,.pc.active .pc-desc{max-height:80px;opacity:1;}
+.pc-cta{display:inline-block;margin-top:.75rem;padding:.45rem 1.2rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);border-radius:1px;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;transform:translateY(6px);opacity:0;transition:.4s;}
+.pc:hover .pc-cta,.pc.active .pc-cta{transform:translateY(0);opacity:1;}
+
+/* ══ MOSAIC ══════════════════════════════════════════════════════════ */
+.mosaic-sec{background:var(--cream);padding:5rem 0;}
+.mosaic-inner{max-width:1440px;margin:auto;padding:0 3rem;}
+.mosaic-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:3rem;}
+.m-tile{border-radius:1rem;overflow:hidden;position:relative;cursor:pointer;display:block;}
+.m-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.m-tile:hover .m-bg{transform:scale(1.04);}
+.m-over{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;}
+.m-tag{font-size:.56rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.45rem;}
+.m-title{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:500;line-height:1.12;}
+.m-link{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:.75rem;display:inline-flex;align-items:center;gap:.35rem;border-bottom:1px solid currentColor;padding-bottom:.12rem;}
+/* red tile */
+.m-red{background:var(--rouge);height:300px;}
+.m-red .m-over{background:linear-gradient(to top,rgba(120,0,15,.35),transparent);}
+.m-red .m-tag,.m-red .m-title,.m-red .m-link{color:#fff;}
+/* cream tile */
+.m-cream{background:var(--sand);height:300px;}
+.m-cream .m-tag{color:var(--muted);}
+.m-cream .m-title{color:var(--navy);}
+.m-cream .m-link{color:var(--navy);}
+/* full-width */
+.m-photo{grid-column:1/-1;height:360px;}
+.m-photo .m-over{background:linear-gradient(to right,rgba(6,14,26,.68) 40%,rgba(6,14,26,.08));}
+.m-photo .m-tag{color:rgba(255,255,255,.48);}
+.m-photo .m-title{color:#fff;font-size:clamp(1.5rem,2.8vw,2.4rem);}
+.m-photo .m-link{color:#fff;border-color:rgba(255,255,255,.35);}
+
+/* ══ HISTOIRE ════════════════════════════════════════════════════════ */
+.hist-sec{background:var(--cream);padding:5rem 0;}
+.hist-inner{max-width:1440px;margin:auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.hist-img{border-radius:1rem;overflow:hidden;height:430px;position:relative;}
+.hist-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.hist-accent{position:absolute;bottom:2rem;right:-1.5rem;width:130px;height:130px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;box-shadow:0 20px 55px rgba(13,40,85,.4);}
+.hist-copy .sec-h2{font-size:clamp(2rem,3.5vw,3rem);}
+.hist-body{font-size:.86rem;color:var(--muted);line-height:1.9;margin-top:1.2rem;}
+.hist-cta{display:inline-flex;align-items:center;gap:.45rem;margin-top:2rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--navy);padding-bottom:.12rem;transition:.2s;}
+.hist-cta:hover{color:var(--rouge);border-color:var(--rouge);}
+
+/* ══ JOURNAL ═════════════════════════════════════════════════════════ */
+.journal-sec{background:var(--navy);padding:5rem 0;}
+.journal-inner{max-width:1440px;margin:auto;padding:0 3rem;}
+.journal-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;}
+.journal-head .sec-h2{color:#fff;}
+.j-see{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);border-bottom:1px solid rgba(255,255,255,.18);transition:.2s;}
+.j-see:hover{color:#fff;border-color:#fff;}
+.j-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.jcard{border-radius:1rem;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:.3s;cursor:pointer;}
+.jcard:hover{background:rgba(255,255,255,.08);transform:translateY(-4px);}
+.jcard-img{height:190px;background-size:cover;background-position:center;}
+.jcard-body{padding:1.4rem;}
+.jcard-tag{font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem;}
+.jcard-title{font-family:var(--serif);font-size:1.05rem;color:#fff;font-weight:400;line-height:1.3;}
+.jcard-lnk{display:inline-block;margin-top:.75rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);border-bottom:1px solid rgba(255,255,255,.14);transition:.2s;}
+.jcard:hover .jcard-lnk{color:#fff;border-color:#fff;}
+
+/* ══ FOOTER ══════════════════════════════════════════════════════════ */
+.site-footer{background:var(--navy);}
+.ft-service{background:#152e62;border-bottom:1px solid rgba(255,255,255,.09);padding:2.5rem 0;}
+.ft-service-inner{max-width:1440px;margin:auto;padding:0 3rem;display:grid;grid-template-columns:repeat(3,1fr);}
+.ftsvc{padding:0 2.5rem;text-align:center;}
+.ftsvc:not(:last-child){border-right:1px solid rgba(255,255,255,.09);}
+.ftsvc-title{font-size:.75rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#fff;margin-bottom:.45rem;}
+.ftsvc-phone{font-size:.85rem;font-weight:600;color:#7087C6;text-decoration:underline;display:block;margin-bottom:.18rem;}
+.ftsvc-desc{font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.65;}
+.ft-social-row{padding:1.5rem 3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.ft-social-inner{max-width:1440px;margin:auto;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;}
+.ft-soc-label{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.32);}
+.ft-socials{display:flex;gap:.7rem;}
+.ft-soc{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:.2s;}
+.ft-soc:hover{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+.ft-soc svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;}
+.ft-nl-label{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.32);}
+.ft-nl{display:flex;flex:1;max-width:460px;margin-left:auto;}
+.ft-nl input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-right:none;border-radius:2px 0 0 2px;padding:.65rem 1rem;font-size:.78rem;color:#fff;font-family:var(--sans);}
+.ft-nl input::placeholder{color:rgba(255,255,255,.28);}
+.ft-nl input:focus{outline:none;border-color:rgba(255,255,255,.38);}
+.ft-nl button{background:var(--rouge);border:none;border-radius:0 2px 2px 0;padding:.65rem 1.1rem;cursor:pointer;transition:.2s;}
+.ft-nl button:hover{background:#b8131f;}
+.ft-nl button svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;}
+.ft-main{max-width:1440px;margin:auto;padding:3.5rem 3rem;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.ft-logo{height:58px;width:auto;margin-bottom:1.2rem;filter:brightness(0) invert(1);opacity:.78;}
+.ft-tagline{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:#fff;line-height:1.28;margin-bottom:.65rem;}
+.ft-tagline em{font-style:italic;color:var(--gold);}
+.ft-fdesc{font-size:.74rem;color:rgba(255,255,255,.38);line-height:1.8;max-width:230px;}
+.fc-title{font-size:.56rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.fc-a{display:block;font-size:.78rem;color:rgba(255,255,255,.48);margin-bottom:.38rem;transition:.18s;}
+.fc-a:hover{color:#fff;padding-left:.2rem;}
+.ft-bottom{max-width:1440px;margin:auto;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.ft-legal{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.ft-legal a{font-size:.62rem;color:rgba(255,255,255,.28);transition:.18s;}
+.ft-legal a:hover{color:rgba(255,255,255,.65);}
+.ft-pays{display:flex;gap:.4rem;}
+.pay-b{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:.18rem .5rem;font-size:.58rem;font-weight:700;color:rgba(255,255,255,.42);}
+.ft-copy{font-size:.62rem;color:rgba(255,255,255,.2);}
+
+/* ══ RESPONSIVE ══════════════════════════════════════════════════════ */
+@media(max-width:960px){
+  .nav-left,.nav-right .nav-lang,.nav-right .nav-icon-btn{display:none;}
+  .hamburger{display:flex;}
+  .mob-menu{display:block;}
+  .nav-inner{grid-template-columns:auto 1fr auto;gap:0;}
+  .nav-brand{grid-column:2;align-items:center;}
+  .hero-v2,.hist-inner{grid-template-columns:1fr;}
+  .v2-product-area{display:none;}
+  .v2-copy{padding:calc(var(--total-h)+2rem) 1.5rem 3rem;}
+  .hero-copy{padding:0 1.5rem 3rem;}
+  .pc-row{flex-wrap:wrap;}
+  .pc{flex:1 1 48%;height:300px;}
+  .mosaic-grid,.j-grid{grid-template-columns:1fr;}
+  .trust-inner{grid-template-columns:1fr 1fr;}
+  .ft-main{grid-template-columns:1fr 1fr;gap:2rem;}
+  .ft-service-inner{grid-template-columns:1fr;}
+  .ft-social-inner{flex-wrap:wrap;gap:1rem;}
+}
+@media(max-width:600px){
+  :root{--top-h:30px;--nav-h:60px;--total-h:90px;}
+  .hero-h1{font-size:clamp(2.4rem,13vw,3.4rem);}
+  .pc{flex:1 1 100%;}
+  .ft-main{grid-template-columns:1fr;}
+  .topper-right{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOPPER ══════════════════════════════════════════════════════════ -->
+<div class="topper">
+  <div class="topper-inner">
+    <span class="topper-left">Livraison offerte en point relais dès 45€ d'achat</span>
+    <div class="topper-right">
+      <a href="#">Boutiques</a>
+      <a href="#">Fabrique ta paire</a>
+      <a href="#">Carte cadeau</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN NAV ════════════════════════════════════════════════════════ -->
+<header class="site-header header-dark" id="hdr">
+  <div class="nav-inner">
+
+    <!-- LEFT -->
+    <nav class="nav-left">
+      <div class="nav-item">
+        <button class="nav-trig">Femme <span class="chev"></span></button>
+        <div class="mega-drop">
+          <div>
+            <div class="mc-title">Espadrilles Femme</div>
+            <a href="women.html" class="mc-link new">Nouveautés</a>
+            <a href="women.html" class="mc-link soldes-l">Soldes</a>
+            <a href="women.html" class="mc-link">Unies</a>
+            <a href="women.html" class="mc-link">Imprimées</a>
+            <a href="women.html" class="mc-link">Marinières</a>
+            <a href="women.html" class="mc-link">Compensées</a>
+            <a href="women.html" class="mc-link">À lacets</a>
+            <a href="women.html" class="mc-link">Premium · Mules</a>
+          </div>
+          <div>
+            <div class="mc-title">Collaborations</div>
+            <a href="collections.html" class="mc-link">Coupe du Monde</a>
+            <a href="collections.html" class="mc-link">Harry Potter</a>
+            <a href="collections.html" class="mc-link">Warner Bros</a>
+            <a href="collections.html" class="mc-link">Mariage</a>
+            <a href="collections.html" class="mc-link">Pays &amp; Régions</a>
+            <div class="mc-title" style="margin-top:1.1rem">Personnaliser</div>
+            <a href="products.html" class="mc-link">Dessine-moi !</a>
+            <a href="products.html" class="mc-link">Brode-moi !</a>
+          </div>
+          <a href="women.html" class="mc-visual" style="background-image:url('images/campaign-1.jpg')">
+            <span class="mc-vis-lbl">Summer '26</span>
+          </a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-trig">Homme <span class="chev"></span></button>
+        <div class="mega-drop">
+          <div>
+            <div class="mc-title">Espadrilles Homme</div>
+            <a href="men.html" class="mc-link new">Nouveautés</a>
+            <a href="men.html" class="mc-link soldes-l">Soldes</a>
+            <a href="men.html" class="mc-link">Unies</a>
+            <a href="men.html" class="mc-link">Marinières</a>
+            <a href="men.html" class="mc-link">Premium · Mules</a>
+          </div>
+          <div>
+            <div class="mc-title">Collaborations</div>
+            <a href="collections.html" class="mc-link">France Rugby</a>
+            <a href="collections.html" class="mc-link">Stade Toulousain</a>
+            <a href="collections.html" class="mc-link">Goldorak</a>
+            <a href="collections.html" class="mc-link">La Vache qui rit</a>
+            <div class="mc-title" style="margin-top:1.1rem">Personnaliser</div>
+            <a href="products.html" class="mc-link">Kit Fabrique ta paire</a>
+          </div>
+          <a href="men.html" class="mc-visual" style="background-image:url('images/campaign-3.jpg')">
+            <span class="mc-vis-lbl">Homme</span>
+          </a>
+        </div>
+      </div>
+      <a href="collections.html" class="nav-trig" style="padding:0 .85rem">Collections</a>
+      <a href="our_story.html"   class="nav-trig" style="padding:0 .85rem">Notre histoire</a>
+      <a href="products.html"    class="nav-trig soldes" style="padding:0 .85rem">Soldes</a>
+    </nav>
+
+    <!-- BRAND — real cursive logo centered -->
+    <a href="payote-v4.html" class="nav-brand">
+      <img src="images/logo-payote.png" alt="Payote · Made in France" class="brand-logo-img"/>
+    </a>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <button class="nav-lang" onclick="window.i18n&&window.i18n.toggle()">FR / EN</button>
+      <a href="shoe_size.html" class="nav-icon-btn" aria-label="Guide tailles">
+        <svg viewBox="0 0 24 24"><path d="M20 6H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"/><path d="M12 6v12M8 10v4M16 10v4"/></svg>
+      </a>
+      <a href="#" class="nav-icon-btn" aria-label="Rechercher">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </a>
+      <a href="#" class="nav-icon-btn" aria-label="Mon compte">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a href="products.html" class="nav-cart-btn">
+        Panier <span class="cart-badge">0</span>
+      </a>
+      <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<nav class="mob-menu" id="mobMenu">
+  <div class="mob-sec"><div class="mob-sec-t">Femme</div>
+    <a href="women.html" class="mob-a r">Nouveautés</a>
+    <a href="women.html" class="mob-a r">Soldes</a>
+    <a href="women.html" class="mob-a">Unies · Imprimées · Marinières</a>
+    <a href="women.html" class="mob-a">Compensées · Lacets · Premium</a>
+  </div>
+  <div class="mob-sec"><div class="mob-sec-t">Homme</div>
+    <a href="men.html" class="mob-a r">Nouveautés</a>
+    <a href="men.html" class="mob-a r">Soldes</a>
+    <a href="men.html" class="mob-a">Unies · Marinières · Premium</a>
+  </div>
+  <div class="mob-sec"><div class="mob-sec-t">Explorer</div>
+    <a href="collections.html" class="mob-a">Collections &amp; Collaborations</a>
+    <a href="our_story.html" class="mob-a">Notre histoire</a>
+    <a href="products.html" class="mob-a">Tous les produits</a>
+  </div>
+  <div class="mob-utils">
+    <button class="mob-util-btn" onclick="window.i18n&&window.i18n.toggle()">FR / EN</button>
+    <a href="currency_selector.html" class="mob-util-btn">€ / $</a>
+    <a href="shoe_size.html" class="mob-util-btn">Guide tailles</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     V1 — CINEMATIC (full-bleed sharp photo, copy bottom-left)
+══════════════════════════════════════════════════════════════ -->
+<div class="v-section on" id="v1">
+
+  <section class="hero-v1">
+    <div class="hero-photo"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Summer 2026</div>
+      <h1 class="hero-h1">
+        Wear France.<br>
+        Feel the <em>Sud.</em>
+      </h1>
+      <p class="hero-sub">Des espadrilles fabriquées en France,<br>avec passion et savoir-faire depuis 1975.</p>
+      <a href="products.html" class="hero-cta">
+        Découvrir la collection <span class="hero-cta-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Collection strip -->
+  <div class="coll-strip">
+    <div class="coll-head">
+      <div class="coll-title">Nouvelles collections</div>
+      <a href="collections.html" class="coll-see">Voir tout →</a>
+    </div>
+    <div class="coll-wrap">
+      <button class="coll-arr arr-l" id="arrL" aria-label="Précédent"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="coll-track" id="ctrack">
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/campaign-1.jpg')"></div><div class="coll-body"><div class="coll-tag">Été 2026</div><div class="coll-name">Les Unies</div><div class="coll-price">À partir de €39</div><span class="coll-link">Voir →</span></div></div>
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/product-2.jpg')"></div><div class="coll-body"><div class="coll-tag">Best seller</div><div class="coll-name">Marinières</div><div class="coll-price">€39</div><span class="coll-link">Voir →</span></div></div>
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/campaign-2.jpg')"></div><div class="coll-body"><div class="coll-tag">Collection</div><div class="coll-name">Imprimées Fleurs</div><div class="coll-price">€42</div><span class="coll-link">Voir →</span></div></div>
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/product-3.jpg')"></div><div class="coll-body"><div class="coll-tag">Premium</div><div class="coll-name">Compensée Lacets</div><div class="coll-price">€49</div><span class="coll-link">Voir →</span></div></div>
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/product-4.jpg');background-position:center 20%"></div><div class="coll-body"><div class="coll-tag">Premium</div><div class="coll-name">À Paillettes</div><div class="coll-price">€59</div><span class="coll-link">Voir →</span></div></div>
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/product-5.jpg')"></div><div class="coll-body"><div class="coll-tag">Nouveauté</div><div class="coll-name">Mule Glitter</div><div class="coll-price">€49</div><span class="coll-link">Voir →</span></div></div>
+        <div class="coll-card"><div class="coll-card-img" style="background-image:url('images/campaign-3.jpg')"></div><div class="coll-body"><div class="coll-tag">Collection Homme</div><div class="coll-name">Les Classiques</div><div class="coll-price">À partir de €39</div><span class="coll-link">Voir →</span></div></div>
+      </div>
+      <button class="coll-arr arr-r" id="arrR" aria-label="Suivant"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Trust -->
+  <div class="trust-band">
+    <div class="trust-inner">
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="ti-label">Fabriquées en France</div><div class="ti-desc">Dans nos ateliers depuis 1975</div></div></div>
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div><div class="ti-label">Faites main</div><div class="ti-desc">Chaque paire est unique</div></div></div>
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="ti-label">Éco-responsables</div><div class="ti-desc">Matériaux durables, sourcés avec soin</div></div></div>
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div class="ti-label">L'art de vivre du Sud</div><div class="ti-desc">Un style intemporel, entre terre et mer</div></div></div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <section class="products-sec">
+    <div class="products-inner">
+      <div class="section-head">
+        <div><div class="sec-eye">Notre sélection</div><h2 class="sec-h2">Les incontournables<br>de la saison.</h2></div>
+        <a href="products.html" class="sec-see">Voir toute la collection →</a>
+      </div>
+      <div class="pc-row">
+        <div class="pc active"><div class="pc-img" style="background-image:url('images/product-4.jpg');background-position:center 25%"></div><div class="pc-body"><div class="pc-tag">Premium</div><div class="pc-name">À Paillettes</div><div class="pc-price">€59</div><div class="pc-desc">Espadrille compensée à paillettes dorées. Pour les grandes occasions comme pour le quotidien.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+        <div class="pc"><div class="pc-img" style="background-image:url('images/product-2.jpg')"></div><div class="pc-body"><div class="pc-tag">Best seller</div><div class="pc-name">Marinière</div><div class="pc-price">€39</div><div class="pc-desc">La rayure bretonne réinterprétée. Iconique et intemporelle.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+        <div class="pc"><div class="pc-img" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div><div class="pc-body"><div class="pc-tag">Été 2026</div><div class="pc-name">Compensée Lacets</div><div class="pc-price">€49</div><div class="pc-desc">Confort et élégance à chaque pas. La signature de nos ateliers.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+        <div class="pc"><div class="pc-img" style="background-image:url('images/product-5.jpg')"></div><div class="pc-body"><div class="pc-tag">Nouveauté</div><div class="pc-name">Mule Glitter</div><div class="pc-price">€49</div><div class="pc-desc">La mule pailletée qui illumine chaque tenue.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mosaic -->
+  <section class="mosaic-sec">
+    <div class="mosaic-inner">
+      <div class="sec-eye">Collections &amp; Expériences</div>
+      <h2 class="sec-h2">Plus qu'une paire,<br>une histoire à écrire.</h2>
+      <div class="mosaic-grid">
+        <a href="products.html" class="m-tile m-red">
+          <div class="m-over"><div class="m-tag">Créez la vôtre</div><div class="m-title">Fabrique ta paire à la maison.</div><span class="m-link">Découvrir le kit →</span></div>
+        </a>
+        <a href="collections.html" class="m-tile m-cream">
+          <div class="m-bg" style="background-image:url('images/campaign-1.jpg')"></div>
+          <div class="m-over" style="background:linear-gradient(to top,rgba(240,232,220,.95) 30%,rgba(240,232,220,.4))">
+            <div class="m-tag" style="color:var(--muted)">Collection été 2026</div>
+            <div class="m-title" style="color:var(--navy)">Nouveaux coloris.<br>Nouveau soleil.</div>
+            <span class="m-link" style="color:var(--navy)">Voir la collection →</span>
+          </div>
+        </a>
+        <a href="our_story.html" class="m-tile m-photo">
+          <div class="m-bg" style="background-image:url('images/campaign-3.jpg')"></div>
+          <div class="m-over"><div class="m-tag">Le journal</div><div class="m-title">Histoires du Sud, rencontres et savoir-faire.</div><span class="m-link">Lire les articles →</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notre histoire -->
+  <section class="hist-sec">
+    <div class="hist-inner">
+      <div class="hist-img">
+        <div class="hist-img-bg" style="background-image:url('images/campaign-2.jpg')"></div>
+        <div class="hist-accent">
+          <div style="font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.18rem">Depuis</div>
+          <div style="font-size:1.3rem;font-weight:700;color:#fff;line-height:1">1975</div>
+          <div style="font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:.18rem">Perpignan</div>
+        </div>
+      </div>
+      <div class="hist-copy">
+        <div class="sec-eye">Notre histoire</div>
+        <h2 class="sec-h2">Née dans le Sud<br>de la France.</h2>
+        <p class="hist-body">Payote, c'est l'histoire d'une famille, d'un territoire et d'un savoir-faire transmis de génération en génération. Née dans le Sud, fabriquée à Perpignan, portée partout dans le monde.<br><br>Des espadrilles authentiques, confortables et durables, conçues dans nos ateliers pour vous offrir le meilleur de l'art de vivre du Sud.</p>
+        <a href="our_story.html" class="hist-cta">Découvrir notre histoire →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal -->
+  <section class="journal-sec">
+    <div class="journal-inner">
+      <div class="journal-head">
+        <div><div class="sec-eye">Le journal</div><h2 class="sec-h2">Histoires du Sud,<br>rencontres et savoir-faire.</h2></div>
+        <a href="our_story.html" class="j-see">Lire tous les articles →</a>
+      </div>
+      <div class="j-grid">
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-2.jpg')"></div><div class="jcard-body"><div class="jcard-tag">Savoir-faire</div><div class="jcard-title">Le secret d'une bonne espadrille : nos artisans perpignanais</div><a href="made_in_france.html" class="jcard-lnk">Lire l'article →</a></div></div>
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-3.jpg')"></div><div class="jcard-body"><div class="jcard-tag">Recyclage</div><div class="jcard-title">Nos engagements éco-responsables : ce que ça change</div><a href="recyclage.html" class="jcard-lnk">Lire l'article →</a></div></div>
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-1.jpg');background-position:center 40%"></div><div class="jcard-body"><div class="jcard-tag">Nos actions</div><div class="jcard-title">L'espadrille aux quatre coins du monde : nos marchés internationaux</div><a href="nos_actions.html" class="jcard-lnk">Lire l'article →</a></div></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /v1 -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     V2 — WHITE EDITORIAL (exact reference: white bg, big text left, product right)
+══════════════════════════════════════════════════════════════ -->
+<div class="v-section" id="v2">
+
+  <section class="hero-v2">
+    <div class="v2-copy">
+      <div class="v2-eyebrow">Summer 2026 · Espadrilles de France</div>
+      <h1 class="v2-h1">LE STYLE<br>FRANÇAIS.<br>L'ESPRIT<br>DU <span class="rg">SUD.</span></h1>
+      <div class="v2-sep"></div>
+      <p class="v2-sub">Des espadrilles authentiques fabriquées en France avec passion.</p>
+      <a href="products.html" class="v2-btn">Découvrir la collection →</a>
+      <div class="v2-badge">
+        <div class="v2-badge-label">Made in France</div>
+        <span class="v2-since">1975</span>
+        <div class="v2-badge-label">Perpignan</div>
+      </div>
+    </div>
+    <div class="v2-product-area">
+      <img src="images/product-3.jpg" alt="Espadrille Compensée Payote" class="v2-product-img"/>
+    </div>
+  </section>
+
+  <!-- Same lower sections -->
+  <div class="trust-band">
+    <div class="trust-inner">
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="ti-label">Fabriquées en France</div><div class="ti-desc">Dans nos ateliers depuis 1975</div></div></div>
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div><div class="ti-label">Faites main</div><div class="ti-desc">Chaque paire est unique</div></div></div>
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="ti-label">Éco-responsables</div><div class="ti-desc">Matériaux durables</div></div></div>
+      <div class="ti"><div class="ti-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div class="ti-label">L'art de vivre du Sud</div><div class="ti-desc">Un style intemporel</div></div></div>
+    </div>
+  </div>
+
+  <section class="products-sec">
+    <div class="products-inner">
+      <div class="section-head"><div><div class="sec-eye">Notre sélection</div><h2 class="sec-h2">Les incontournables<br>de la saison.</h2></div><a href="products.html" class="sec-see">Voir toute la collection →</a></div>
+      <div class="pc-row">
+        <div class="pc active"><div class="pc-img" style="background-image:url('images/product-4.jpg');background-position:center 25%"></div><div class="pc-body"><div class="pc-tag">Premium</div><div class="pc-name">À Paillettes</div><div class="pc-price">€59</div><div class="pc-desc">Espadrille compensée à paillettes dorées.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+        <div class="pc"><div class="pc-img" style="background-image:url('images/product-2.jpg')"></div><div class="pc-body"><div class="pc-tag">Best seller</div><div class="pc-name">Marinière</div><div class="pc-price">€39</div><div class="pc-desc">La rayure bretonne réinterprétée.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+        <div class="pc"><div class="pc-img" style="background-image:url('images/product-3.jpg');background-position:center 30%"></div><div class="pc-body"><div class="pc-tag">Été 2026</div><div class="pc-name">Compensée Lacets</div><div class="pc-price">€49</div><div class="pc-desc">Confort et élégance à chaque pas.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+        <div class="pc"><div class="pc-img" style="background-image:url('images/product-5.jpg')"></div><div class="pc-body"><div class="pc-tag">Nouveauté</div><div class="pc-name">Mule Glitter</div><div class="pc-price">€49</div><div class="pc-desc">La mule pailletée qui illumine.</div><a href="products.html" class="pc-cta">Découvrir →</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mosaic-sec">
+    <div class="mosaic-inner">
+      <div class="sec-eye">Collections &amp; Expériences</div>
+      <h2 class="sec-h2">Plus qu'une paire,<br>une histoire à écrire.</h2>
+      <div class="mosaic-grid">
+        <a href="products.html" class="m-tile m-red"><div class="m-over"><div class="m-tag">Créez la vôtre</div><div class="m-title">Fabrique ta paire à la maison.</div><span class="m-link">Découvrir le kit →</span></div></a>
+        <a href="collections.html" class="m-tile m-cream">
+          <div class="m-bg" style="background-image:url('images/campaign-1.jpg')"></div>
+          <div class="m-over" style="background:linear-gradient(to top,rgba(240,232,220,.95) 30%,rgba(240,232,220,.4))"><div class="m-tag" style="color:var(--muted)">Collection été 2026</div><div class="m-title" style="color:var(--navy)">Nouveaux coloris.<br>Nouveau soleil.</div><span class="m-link" style="color:var(--navy)">Voir la collection →</span></div>
+        </a>
+        <a href="our_story.html" class="m-tile m-photo"><div class="m-bg" style="background-image:url('images/campaign-3.jpg')"></div><div class="m-over"><div class="m-tag">Le journal</div><div class="m-title">Histoires du Sud, rencontres et savoir-faire.</div><span class="m-link">Lire les articles →</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hist-sec">
+    <div class="hist-inner">
+      <div class="hist-img"><div class="hist-img-bg" style="background-image:url('images/campaign-2.jpg')"></div><div class="hist-accent"><div style="font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.18rem">Depuis</div><div style="font-size:1.3rem;font-weight:700;color:#fff;line-height:1">1975</div><div style="font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:.18rem">Perpignan</div></div></div>
+      <div class="hist-copy"><div class="sec-eye">Notre histoire</div><h2 class="sec-h2">Née dans le Sud<br>de la France.</h2><p class="hist-body">Payote, c'est l'histoire d'une famille, d'un territoire et d'un savoir-faire transmis de génération en génération.</p><a href="our_story.html" class="hist-cta">Découvrir notre histoire →</a></div>
+    </div>
+  </section>
+
+  <section class="journal-sec">
+    <div class="journal-inner">
+      <div class="journal-head"><div><div class="sec-eye">Le journal</div><h2 class="sec-h2">Histoires du Sud,<br>rencontres et savoir-faire.</h2></div><a href="our_story.html" class="j-see">Lire tous les articles →</a></div>
+      <div class="j-grid">
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-2.jpg')"></div><div class="jcard-body"><div class="jcard-tag">Savoir-faire</div><div class="jcard-title">Le secret d'une bonne espadrille</div><a href="made_in_france.html" class="jcard-lnk">Lire →</a></div></div>
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-3.jpg')"></div><div class="jcard-body"><div class="jcard-tag">Recyclage</div><div class="jcard-title">Nos engagements éco-responsables</div><a href="recyclage.html" class="jcard-lnk">Lire →</a></div></div>
+        <div class="jcard"><div class="jcard-img" style="background-image:url('images/campaign-1.jpg');background-position:center 40%"></div><div class="jcard-body"><div class="jcard-tag">Nos actions</div><div class="jcard-title">L'espadrille aux quatre coins du monde</div><a href="nos_actions.html" class="jcard-lnk">Lire →</a></div></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /v2 -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="ft-service"><div class="ft-service-inner">
+    <div class="ftsvc"><div class="ftsvc-title">Allo Payote ?</div><a href="tel:0468643224" class="ftsvc-phone">04 68 64 32 24</a><div class="ftsvc-desc">Du Lundi au Vendredi<br>9h–13h / 14h–17h</div></div>
+    <div class="ftsvc"><div class="ftsvc-title">Paiement sécurisé</div><div class="ftsvc-desc">En une fois, via PayPal, carte bancaire,<br>virement ou chèque.</div></div>
+    <div class="ftsvc"><div class="ftsvc-title">Livraison offerte</div><div class="ftsvc-desc">En France<br>dès 45€ d'achat.</div></div>
+  </div></div>
+
+  <div class="ft-social-row"><div class="ft-social-inner">
+    <span class="ft-soc-label">Suivez-nous :</span>
+    <div class="ft-socials">
+      <a href="#" class="ft-soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" class="ft-soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="ft-soc" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+      <a href="#" class="ft-soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+    <span class="ft-nl-label">Abonnez-vous :</span>
+    <div class="ft-nl">
+      <input type="email" placeholder="E-mail"/>
+      <button aria-label="S'abonner"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+  </div></div>
+
+  <div class="ft-main">
+    <div><img src="images/logo-payote.png" alt="Payote" class="ft-logo"/><div class="ft-tagline">Espadrilles,<br><em>Made in France.</em></div><p class="ft-fdesc">Née dans le Sud de la France. Fabriquée à Perpignan. Portée partout dans le monde.</p></div>
+    <div><div class="fc-title">Boutique</div><a href="women.html" class="fc-a">Femme</a><a href="men.html" class="fc-a">Homme</a><a href="collections.html" class="fc-a">Enfant</a><a href="products.html" class="fc-a">Carte cadeau</a><a href="collections.html" class="fc-a">Toutes les collections</a></div>
+    <div><div class="fc-title">Informations</div><a href="payment_shipping_returns.html" class="fc-a">Suivi de commande</a><a href="payment_shipping_returns.html" class="fc-a">Foire aux questions</a><a href="payment_shipping_returns.html" class="fc-a">Livraison et retour</a><a href="our_story.html" class="fc-a">C'est quoi Payote ?</a></div>
+    <div><div class="fc-title">Contacts</div><a href="payment_shipping_returns.html" class="fc-a">Nous contacter</a><a href="payment_shipping_returns.html" class="fc-a">Nous rejoindre</a><a href="payment_shipping_returns.html" class="fc-a">Devenir revendeur</a><a href="payment_shipping_returns.html" class="fc-a">Presse &amp; partenariats</a><a href="collections.html" class="fc-a">Collaboration &amp; Influence</a></div>
+    <div><div class="fc-title">Nos boutiques</div><a href="#" class="fc-a">Perpignan</a><a href="#" class="fc-a">Toulouse</a></div>
+  </div>
+
+  <div class="ft-bottom">
+    <div class="ft-legal"><a href="#">C.G.V</a><a href="#">Mentions Légales</a><a href="#">Confidentialité</a><a href="#">Plan du site</a><a href="#">Conditions d'utilisation</a><a href="#">Politique de remboursement</a></div>
+    <div class="ft-pays"><span class="pay-b">VISA</span><span class="pay-b">MC</span><span class="pay-b">PayPal</span><span class="pay-b">Klarna</span></div>
+    <div class="ft-copy">© 2026, Payote</div>
+  </div>
+</footer>
+
+<!-- VERSION SWITCHER -->
+<div id="vsw">
+  <button class="vbtn on" onclick="switchV(1)">✦ Cinématique</button>
+  <button class="vbtn"    onclick="switchV(2)">◫ Boutique</button>
+</div>
+
+<script>
+const hdr = document.getElementById('hdr');
+
+/* Scroll — header becomes white with shadow */
+window.addEventListener('scroll',()=>{
+  hdr.classList.toggle('scrolled', window.scrollY > 40);
+},{passive:true});
+
+/* Version switch */
+const vBtns = document.querySelectorAll('.vbtn');
+function switchV(n){
+  document.getElementById('v1').classList.toggle('on', n===1);
+  document.getElementById('v2').classList.toggle('on', n===2);
+  /* V1 = dark hero → transparent nav with white text; V2 = light */
+  hdr.classList.toggle('header-dark',  n===1);
+  hdr.classList.toggle('header-light', n===2);
+  hdr.classList.remove('scrolled');
+  vBtns.forEach((b,i)=>b.classList.toggle('on', i===n-1));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+/* add header-light class for V2 */
+document.head.insertAdjacentHTML('beforeend',`<style>
+  .site-header.header-light{background:rgba(255,255,255,.97);border-bottom:1px solid rgba(13,40,85,.08);}
+  .site-header.header-light .nav-trig{color:var(--navy);}
+  .site-header.header-light .brand-logo-img{filter:none;}
+  .site-header.header-light .nav-lang{color:var(--navy);}
+  .site-header.header-light .nav-icon-btn svg{stroke:var(--navy);}
+  .site-header.header-light .nav-icon-btn:hover{background:rgba(13,40,85,.06);}
+  .site-header.header-light .nav-cart-btn{border-color:var(--navy);color:var(--navy);}
+  .site-header.header-light .hamburger span{background:var(--navy);}
+</style>`);
+
+/* Expandable product cards */
+document.querySelectorAll('.pc').forEach(pc=>{
+  pc.addEventListener('mouseenter',()=>{
+    pc.closest('.pc-row').querySelectorAll('.pc').forEach(p=>p.classList.remove('active'));
+    pc.classList.add('active');
+  });
+});
+
+/* Collection strip arrows */
+const ctrack = document.getElementById('ctrack');
+document.getElementById('arrL')?.addEventListener('click',()=>ctrack.scrollBy({left:-266,behavior:'smooth'}));
+document.getElementById('arrR')?.addEventListener('click',()=>ctrack.scrollBy({left:266,behavior:'smooth'}));
+
+/* Mobile hamburger */
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mobMenu');
+ham.addEventListener('click',()=>{
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>
